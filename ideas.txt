@@ -1,0 +1,51 @@
+    Description of Application:
+
+-This application should be a similar design as of www.reddit.com;
+-The user should be able to signup, signin, and signout;
+
+    ~Signup requirements:
+        ~username - must be at least 3 digits long
+        ~email - must be unique and have a valid email format
+        ~password - must be at least 6 digits long
+        ~password confirmation - must match password provided
+        ~signup must have all of the top specifications to be filled in with valid requirements;
+
+    
+    ~Signin requirements:
+        ~provide username and password that the model validates;
+        ~the browser should remember the password of the user;
+
+-The user should be able to post links, text, or both into the forum page;
+
+    ~Title requirements:
+        ~must not be blank;
+        ~at least 1 digit long;
+        ~users cannot edit the title content;
+    ~Text requirements:
+        ~must not be blank;
+        ~at least 1 digit long;
+        ~users may edit the text content;
+
+    ~Front Page requirements:
+        ~the front page must contain threads from different subsections
+        ~the front page must not show content of banned/blocked subsections
+
+    ~Posts/Threads requirements:
+        ~post feeds must be arranged from most points to least;
+        ~post feeds must have an upvote/downvote on the left side of the text field to apply vote count on the thread;
+        ~posts may have a NSFW tag that indicated a post is "not suitable for work".
+        ~post feeds must contain the username located under the thread title along with the created timestamp;
+        ~posts older than 24hours must be eliminated from the front of the page;
+        ~posts odler than 6 months should not under any circumtances change the score count (users cant upvote/downvote them)
+
+    ~Subsections requirements:
+        ~user may create a subsection;
+        ~user cannot delete a subsection unless he/she contains moderator/admin power
+        ~a subsection may be blocked temporarely
+        ~user cannot post threads in a blocked subsection
+        ~a subsection must only contain feeds of that specific subsection an no other
+
+~User requirements:
+    ~user must not be able to edit or delete any other users unless admin;
+    ~user must not be able to delete itself;
+    ~user may upvote/downvote a thread that is less than 6 months old;

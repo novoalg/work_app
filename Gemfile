@@ -14,6 +14,7 @@ gem 'nokogiri', '~> 1.5.10'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'json'
+gem 'sqlite3'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -34,7 +35,6 @@ end
 group :development, :test do
   gem 'rspec-rails', "2.11.0"
   gem 'capybara', "1.1.2"
-  gem 'sqlite3', '1.3.5'
 end
 
 group :test do
