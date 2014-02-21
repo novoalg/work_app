@@ -1,9 +1,14 @@
 WorkApp::Application.routes.draw do
+  get "users/new"
+
   get "static_pages/home"
 
   get "static_pages/help"
   match '/', :to => 'static_pages#home'
   match '/help', :to => 'static_pages#help'
+  match '/signin', :to => 'users#new'
+  match '/signup', :to => 'sessions#new'
+  match '/signout', :to => 'sessions#destroy', :via => :delete
 
   root :to => 'static_pages#home'
 
