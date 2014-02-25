@@ -1,3 +1,4 @@
+
 @import "bootstrap";
 
 /* mixins, variables, etc. */
@@ -75,7 +76,7 @@ p {
   font-weight: bold;
   line-height: 1;
   &:hover {
-    color: white;
+    color: #888178;
     text-decoration: none;
   }
 }
@@ -243,3 +244,4 @@ aside {
     margin-bottom: 5px;
   }
 }
+

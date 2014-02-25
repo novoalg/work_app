@@ -2,17 +2,18 @@
 #
 # Table name: users
 #
-#  id         :integer          not null, primary key
-#  username   :string(255)
-#  email      :string(255)
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id              :integer          not null, primary key
+#  username        :string(255)
+#  email           :string(255)
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  remember_token  :string(255)
+#  password_digest :string(255)
 #
 
 require 'spec_helper'
 
 describe User do
-
     before do
         @user = User.new(:username => "ramrod", :email => "user@example.com", :password => "foobar", :password_confirmation => "foobar")
     end
@@ -22,6 +23,7 @@ describe User do
     it { should respond_to(:username) }
     it { should respond_to(:email) }
     it { should respond_to(:password_confirmation) }
+    it { should respond_to(:password_digest) }
     it { should respond_to(:remember_token) }
     it { should respond_to(:authenticate) }
 
@@ -41,7 +43,7 @@ describe User do
     describe "when email format is invalid" do
         it "should be invalid" do
             addresses = %w[user@foo,com user_at_foo.org example.user@foo.
-                         foo@bar_baz.com foo@bar+baz.com]
+foo@bar_baz.com foo@bar+baz.com]
             addresses.each do |invalid_address|
                 @user.email = invalid_address
                 @user.should_not be_valid
