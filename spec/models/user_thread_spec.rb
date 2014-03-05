@@ -1,7 +1,16 @@
+# == Schema Information
+#
+# Table name: user_threads
+#
+#  id         :integer          not null, primary key
+#  content    :string(255)
+#  title      :string(255)
+#  user_id    :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 require 'spec_helper'
 
 describe UserThread do
-    let(:user) { FactoryGirl.create(:user) }
-    before { @user_thread = user.user_thread.build(:content => "Lorem ipsum") }
-    subject { @user_thread }
 end

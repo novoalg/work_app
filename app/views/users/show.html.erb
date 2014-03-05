@@ -1,10 +1,12 @@
-<% provide(:title, @user.username) %>
-<div class="row">
- <asside class="span4">
-  <section>
-	<h2>
+<% if @user.nil? %>
+    <%= render 'shared/user_not_found' %>
+<% else %>
+<%= provide(:title, @user.username) %>
+  <div class="col-xs-s2 col-sm6 col-md-10">
+	<h2 class="col-md-3">
     Overview for <%= @user.username%>
+    <hr></hr>
     </h2>
-  </section>
- </asside>
- </div>
+  </div>
+<%= render 'shared/user_sidebar'%>
+<% end %>

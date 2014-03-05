@@ -4,7 +4,10 @@
 /* mixins, variables, etc. */
 
 $grayMediumLight: #eaeaea;
-
+$grayLight: #e6e6e6;
+$grayDarker: #2E2E2E;
+$grayLighter: #EBEBEB;
+$blue: #2B3E85;
 @mixin box_sizing {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -52,7 +55,7 @@ h2 {
   font-size: 1.7em;
   letter-spacing: -1px;
   margin-bottom: 30px;
-  text-align: center;
+  text-align:center;
   font-weight: normal;
   color: $grayLight;
 }

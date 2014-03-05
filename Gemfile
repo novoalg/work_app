@@ -2,7 +2,6 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.16'
 gem 'bootstrap-sass', '~> 3.1.1'
-gem 'bcrypt-ruby', '3.0.1'
 gem 'faker', '1.0.1'
 gem 'will_paginate', '~> 3.0.5' 
 gem 'bootstrap-will_paginate', '0.0.6'
@@ -12,6 +11,9 @@ gem 'json'
 gem 'nokogiri', '~> 1.5.10'
 gem 'cucumber-rails', '1.2.1', :require => false
 gem 'database_cleaner', '0.7.0'
+gem 'rubycas-client'
+gem 'person_record', :git => 'git://github.com/haynescw/PersonRecord.git'
+gem 'friendly_id'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 

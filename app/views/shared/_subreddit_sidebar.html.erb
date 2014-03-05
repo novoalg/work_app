@@ -1,0 +1,18 @@
+<%= provide('title', @subreddits.title) %>
+<div class="row">
+<div class="col-xs-6 col-sm-2">
+<div class="list-group">
+
+<a href="#" class="list-group-item">
+<h4><%= @subreddits.subname %></h4>
+</a>
+<a href="<%= '#' %>" class="list-group-item">
+<small class="glyphicon glyphicon-heart"> 0 users subscribed</small>
+</a>
+<a href="#" class="list-group-item">
+<h4>Description:</h4>
+<p><%= @subreddits.description  %></p>
+</a>
+</div>
+</div>
+</div>

@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="col-md-4">
+  
+<%= form_for(@subreddits) do |f| %>
+
+<%= provide('title', "Create your new subreddit") %>
+<%= render 'shared/error_messages', :object => f.object %>
+<%= f.hidden_field :user_id, :value => current_user.id %>
+<%= f.label :subname %>
+<%= f.text_field :subname %>
+<%= f.label :title %>
+<%= f.text_field :title %>
+<%= f.label :description %>
+<%= f.text_field :description%>
+<%= f.submit "Create", :class => "btn btn-small btn-primary"%>
+<% end %>
+</div>
+</div>

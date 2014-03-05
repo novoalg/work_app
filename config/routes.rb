@@ -1,8 +1,14 @@
 WorkApp::Application.routes.draw do
   resources :users
+  resources :subreddits do
+    resources :posts, :except => [:new, :create]
+  end
+  resources :posts, :only => [:new, :create]
+ # match '/posts/new', :to => 'posts#new', :as => 'new_subreddit_post', :via => :get
   resources :sessions, :only => [:new, :create, :destroy]
   resources :messages, :only => [:new, :show, :index]
   match '/', :to => 'static_pages#home'
+#  match '/subreddits/:subname', :to => 'subreddits#show'
   match '/help', :to => 'static_pages#help'
   match '/signin', :to => 'sessions#new'
   match '/signup', :to => 'users#new'

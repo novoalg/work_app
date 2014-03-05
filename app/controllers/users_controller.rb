@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
+    @user = User.find_by_username(params[:id])
   end
 
   def edit
@@ -40,7 +40,7 @@ class UsersController < ApplicationController
 
     private
     def signed_in_user
-        unless signed_in?
+        unless logged_in?
             store_location
             redirect_to signin_url, :notice => "Please sign in." 
         end

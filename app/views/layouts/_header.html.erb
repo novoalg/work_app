@@ -1,17 +1,20 @@
 <header class="navbar navbar-default navbar-fixed-top">
-  <div id="navbar-inner">
     <div class="container">
+    <div class="navbar-header">
       <%= link_to "fake-reddit", root_path, :id => "logo" %>
-      <nav>
-        <ul class="nav pull-left">
-           <li><%= link_to "Hot", root_path %></li>
-           <li><%= link_to "New", help_path %></li>
-       </ul>
-       <ul class="nav pull-right">
-          <% if signed_in? %>
+      </div>
+
+      <nav class="nav navbar-nav navbar-left">
+        <ul class="nav navbar-nav">
+           <li><%= link_to "Hot", '#' %></li>
+           <li><%= link_to "New", '#' %></li>
+           <li><%= link_to "Subreddits", subreddits_path%></li>
+      </nav>
+      <nav class="nav navbar-nav navbar-right">
+          <% if logged_in? %>
             <li><%=link_to current_user.username + "(0)(0)", current_user%></li>
-            <li><%= link_to 'messages', messages_path%></li>
-            <li><%= link_to 'preferences', edit_user_path(current_user)%></li>
+            <li><%= link_to '', messages_path, :class => "glyphicon glyphicon-envelope"%></li>
+            <li><%= link_to '', edit_user_path(current_user), :class => "glyphicon glyphicon-cog"%></li>
             <li><%= link_to 'logout', signout_path, :method => "delete"%></li>
           <% else %>
     	      <span>want to join? <%= link_to "login", signin_path %> or 
@@ -19,6 +22,5 @@
           <% end %>
         </ul>
       </nav>
-    </div>
   </div>
 </header>
