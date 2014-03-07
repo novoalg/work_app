@@ -14,6 +14,7 @@
 class Subreddit < ActiveRecord::Base
   attr_accessible :subname, :title, :description, :user_id
   belongs_to :user
+  has_many :posts, :foreign_key => "subname"
   validates :user_id, :presence => true
   VALID_SUBNAME_REGEX = /^([a-z]{3,}|[a-z]{1,}[0-9]{1,}|[a-z]{1,}[0-9]{1,}[a-z]{1,}|[\w]{3,}[a-z]|[a-z]+[\w]+[0-9]+|[a-z]{3,}[0-9])$/
   validates :subname, :presence => true, :uniqueness => true, :length => { :maximum => 15 }, :format => { :with => VALID_SUBNAME_REGEX }
@@ -22,6 +23,7 @@ class Subreddit < ActiveRecord::Base
   def to_param
     "#{subname}".parameterize
   end
+
 
 
 end

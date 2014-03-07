@@ -14,6 +14,7 @@ gem 'database_cleaner', '0.7.0'
 gem 'rubycas-client'
 gem 'person_record', :git => 'git://github.com/haynescw/PersonRecord.git'
 gem 'friendly_id'
+gem "url_validator", "~> 0.0.3"
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 

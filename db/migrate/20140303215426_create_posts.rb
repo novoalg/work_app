@@ -3,7 +3,6 @@ class CreatePosts < ActiveRecord::Migration
     create_table :posts do |t|
       t.string :title
       t.string :description
-      t.integer :subreddit_id
       t.integer :user_id
 
       t.timestamps

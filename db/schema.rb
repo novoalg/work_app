@@ -10,7 +10,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140303223019) do
+ActiveRecord::Schema.define(:version => 20140306194829) do
+
+  create_table "comments", :force => true do |t|
+    t.string   "content"
+    t.integer  "user_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.string   "reply"
+    t.integer  "post_id"
+    t.integer  "subreddit_it"
+  end
+
+  add_index "comments", ["user_id", "created_at"], :name => "index_comments_on_user_id_and_created_at"
 
   create_table "messages", :force => true do |t|
     t.string   "content"
@@ -22,11 +34,11 @@ ActiveRecord::Schema.define(:version => 20140303223019) do
   create_table "posts", :force => true do |t|
     t.string   "title"
     t.string   "description"
-    t.integer  "subreddit_id"
     t.integer  "user_id"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.string   "url"
+    t.string   "subname"
   end
 
   add_index "posts", ["user_id", "created_at"], :name => "index_posts_on_user_id_and_created_at"
@@ -41,16 +53,6 @@ ActiveRecord::Schema.define(:version => 20140303223019) do
   end
 
   add_index "subreddits", ["user_id", "created_at"], :name => "index_subreddits_on_user_id_and_created_at"
-
-  create_table "user_threads", :force => true do |t|
-    t.string   "content"
-    t.string   "title"
-    t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  add_index "user_threads", ["user_id", "created_at"], :name => "index_user_threads_on_user_id_and_created_at"
 
   create_table "users", :force => true do |t|
     t.string   "username"

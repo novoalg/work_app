@@ -1,7 +1,9 @@
 WorkApp::Application.routes.draw do
   resources :users
   resources :subreddits do
-    resources :posts, :except => [:new, :create]
+    resources :posts, :except => [:new, :create] do
+      resources :comments, :only => [:create, :destroy]
+    end
   end
   resources :posts, :only => [:new, :create]
  # match '/posts/new', :to => 'posts#new', :as => 'new_subreddit_post', :via => :get

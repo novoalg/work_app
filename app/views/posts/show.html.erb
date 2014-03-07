@@ -1,2 +1,18 @@
-<%= link_to "#{@post.title}", "http://#{@post.url}" %>
-
+<div class="row">
+<div class="col-xs-s2 col-sm6 col-md-10">
+<div class="col-md-1">
+<div align="center"> 
+<span class="glyphicon glyphicon-arrow-up"></span>
+<h4>0</h4>
+<span class="glyphicon glyphicon-arrow-down"></span>
+</div>
+</div>
+<h4><%= link_to "#{@post.title}", "#{@post.url}", :target => :blank %></h4>
+<small>submitted <%= time_ago_in_words(@post.created_at)%> ago by <%= "#{User.find(@post.user_id).username}"%></small>
+<small><%= link_to 'comments ', subreddit_post_path(@post.subname, @post.id) %>|<%= link_to ' share', '#'%></small>
+<hr></hr>
+<h3><small>top 200 comments</small></h3>
+<hr></hr>
+<%= render 'shared/new_comment' %>
+</div>
+</div>

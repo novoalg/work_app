@@ -1,7 +1,7 @@
 <div class="container">
   <div class="col-md-4">
   
-<%= form_for(@post) do |p| %>
+<%= form_for(@post, :url => posts_path, :method => :post) do |p| %>
 
 <%= provide('title', "Submit a link post!") %>
 <%= render 'shared/error_messages', :object => p.object %>
@@ -10,8 +10,8 @@
 <%= p.text_field :title %>
 <%= p.label :url %>
 <%= p.text_field :url %>
-<%= p.label :subreddit_id %>
-<%= p.text_field :subreddit_id %>
+<%= p.label :subname %>
+<%= p.text_field :subname %>
 
 <%= p.submit "Submit", :class => "btn btn-small btn-primary"%>
 <% end %>

@@ -1,7 +1,9 @@
 class SubredditsController < ApplicationController
-    
     def show
         @subreddits = Subreddit.find_by_subname(params[:id])
+        logger.info "******************#{@subreddits.inspect}"
+        @posts = Post.where(:subname => @subreddits.subname)
+        @posts = @posts.paginate(:page => params[:page], :per_page => 2)
     end
 
     def new

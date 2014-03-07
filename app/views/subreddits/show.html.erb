@@ -1,9 +1,16 @@
 <% if @subreddits.nil? %>
     <%= render 'shared/not_found' %>
 <% else %>
-    
     <div class="col-xs-s2 col-sm6 col-md-10">
         <h2 class="col-md-3">Subreddit's content</h2>
+        <% if @posts %>
+            <ol> 
+                <%= render @posts %>
+                <ul class="pagination">
+                    <%= will_paginate @posts %>
+                </ul>
+            </ol>
+        <% end %>
     </div>
     <%= render 'shared/subreddit_sidebar' %>
 <% end %>

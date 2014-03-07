@@ -13,10 +13,15 @@
 #
 
 class Post < ActiveRecord::Base
-  attr_accessible :description, :subreddit_id, :title, :user_id, :url
+  attr_accessible :description, :subname, :title, :user_id, :url
   belongs_to :user
+  belongs_to :subreddit
+  has_many :comments #, :foreign_key => "user_id"
   validates :user_id, :presence => true
   validates :title, :presence => true
-  validates :subreddit_id, :presence => true
-  
+  URL_REGEX_MASTER = /^(http:\/\/www\.[a-zA-Z0-9]+\.[a-z]{2,3}|www\.[a-zA-Z0-9]+\.[a-z]{2,3}|[a-zA-Z0-9]+\.[a-z]{2,3})/ 
+  validates :url, :format => { :with => URL_REGEX_MASTER } 
+  validates :subname, :presence => true
+
+    
 end

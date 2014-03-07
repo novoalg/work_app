@@ -38,6 +38,7 @@ GEM
     activesupport (3.2.16)
       i18n (~> 0.6, >= 0.6.4)
       multi_json (~> 1.0)
+    addressable (2.3.5)
     annotate (2.5.0)
       rake
     arel (3.0.3)
@@ -170,6 +171,9 @@ GEM
     uglifier (2.4.0)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    url_validator (0.0.7)
+      addressable
+      rails
     websocket (1.0.7)
     will_paginate (3.0.5)
     xpath (0.1.4)
@@ -200,4 +204,5 @@ DEPENDENCIES
   sass-rails (~> 3.2.3)
   sqlite3
   uglifier (>= 1.0.3)
+  url_validator (~> 0.0.3)
   will_paginate (~> 3.0.5)
