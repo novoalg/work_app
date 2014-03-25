@@ -1,0 +1,20 @@
+
+$("#karma").html(<%= escape_javascript(@post.karma.to_s)%>);
+<% if @vote_has_been_destroyed %>
+        $("#up-arrow").replaceWith('<%=j render 'posts/upvote_arrow' %>');
+        $("#down-arrow").replaceWith('<%=j render 'posts/downvote_arrow' %>');
+        $("#karma").replaceWith('<%=j render 'posts/karma_norm'%>');
+
+<% else %>
+    <% if @direction == "up" %>
+        $("#up-arrow").replaceWith('<%=j render 'posts/upvote_arrow_or' %>');
+        $("#down-arrow").replaceWith('<%=j render 'posts/downvote_arrow' %>');
+        $("#karma").replaceWith('<%=j render 'posts/karma_or'%>');
+    <% else %>
+        $("#down-arrow").replaceWith('<%=j render 'posts/downvote_arrow_blu' %>');
+        $("#up-arrow").replaceWith('<%=j render 'posts/upvote_arrow' %>');
+        $("#karma").replaceWith('<%=j render 'posts/karma_blu'%>');
+    <% end %>
+ 
+<% end %>
+

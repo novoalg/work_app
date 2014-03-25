@@ -3,7 +3,7 @@
 <div class="list-group">
 <% @subreddits.each do |s| %>
 
-    <h3 ><%= link_to "#{s.subname}: #{s.title}", subreddits_path + "/#{s.subname}"%></h3>
+    <h3><%= link_to "#{s.subname}: #{s.title}", subreddits_path + "/#{s.subname}"%> <small class="green"><%= "#{s.user_count}"%> users subscribed</small></h3>
     <a href="#" class="list-group-item">
     <h4 class="list-group-item-heading"><%= s.description %></h4>
     </a>

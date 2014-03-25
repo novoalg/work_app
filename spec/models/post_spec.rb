@@ -2,14 +2,15 @@
 #
 # Table name: posts
 #
-#  id           :integer          not null, primary key
-#  title        :string(255)
-#  description  :string(255)
-#  subreddit_id :integer
-#  user_id      :integer
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
-#  url          :string(255)
+#  id          :integer          not null, primary key
+#  title       :string(255)
+#  description :string(255)
+#  user_id     :integer
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  url         :string(255)
+#  subname     :string(255)
+#  karma       :integer
 #
 
 require 'spec_helper'

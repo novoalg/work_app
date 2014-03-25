@@ -1,16 +1,27 @@
 WorkApp::Application.routes.draw do
+  resources :votes, :only => [:new, :create, :destroy]
+  resources :subscriptions, :only => [:new, :create, :destroy]
+
+
   resources :users
   resources :subreddits do
-    resources :posts, :except => [:new, :create] do
-      resources :comments, :only => [:create, :destroy]
+    resources :posts, :except => [:new, :create, :destroy] do
+      resources :comments, :except => [:create, :show, :new, :destroy]
     end
   end
   resources :posts, :only => [:new, :create]
- # match '/posts/new', :to => 'posts#new', :as => 'new_subreddit_post', :via => :get
+  resources :comments, :only => [:show, :new, :create]
+  match '/vote', :to => 'posts#vote', :as => 'vote_subreddit_post', :via => :get
+  match '/vote_comment', :to => 'comments#vote', :as => 'vote_post_comment', :via => :get
+  match '/posts/new_link', :to => 'posts#new', :as => 'new_link_post', :via => :get
+  match '/posts/new_text', :to => 'posts#new', :as => 'new_text_post', :via => :get
+  match '/subscribe', :to => 'subreddits#subscribe', :as => 'subscribe_subreddit', :via => :get
+  match '/posts/:post_id/', :to => 'comments#new', :as => 'new_comment', :via => :get
+  match '/subreddits/:subname/posts/:post_id/comments/:id', :to => 'comments#show', :as => 'show_user_comment'
   resources :sessions, :only => [:new, :create, :destroy]
   resources :messages, :only => [:new, :show, :index]
   match '/', :to => 'static_pages#home'
-#  match '/subreddits/:subname', :to => 'subreddits#show'
+  #match '/subreddits/:subreddit_id/posts/:id/vote/:direction', :to => 'posts#vote', :as => 'vote_subreddit_post'
   match '/help', :to => 'static_pages#help'
   match '/signin', :to => 'sessions#new'
   match '/signup', :to => 'users#new'

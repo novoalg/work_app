@@ -1,12 +1,15 @@
 <% if @user.nil? %>
     <%= render 'shared/user_not_found' %>
 <% else %>
-<%= provide(:title, @user.username) %>
-  <div class="col-xs-s2 col-sm6 col-md-10">
-	<h2 class="col-md-3">
-    Overview for <%= @user.username%>
-    <hr></hr>
-    </h2>
-  </div>
+    <div class="col-md-10">
+	<h2 class="col-md-2">Overview for <%= @user.username%><hr></hr></h2>
+    <br></br>
+    <br></br>
+    <br></br>
+    <br></br>
+    <%= render 'shared/user_comments' %>
+    <br></br>
+    <%= render 'shared/user_posts' %>
+    </div>
 <%= render 'shared/user_sidebar'%>
 <% end %>

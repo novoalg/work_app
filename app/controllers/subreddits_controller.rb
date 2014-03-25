@@ -1,13 +1,13 @@
 class SubredditsController < ApplicationController
     def show
-        @subreddits = Subreddit.find_by_subname(params[:id])
-        logger.info "******************#{@subreddits.inspect}"
-        @posts = Post.where(:subname => @subreddits.subname)
-        @posts = @posts.paginate(:page => params[:page], :per_page => 2)
+        @subreddit = Subreddit.find_by_subname(params[:id])
+        logger.info "******************#{@subreddit.inspect}"
+        @posts = Post.where(:subname => @subreddit.subname)
+        @posts = @posts.paginate(:page => params[:page], :per_page => 15)
     end
 
     def new
-        @subreddits = Subreddit.new
+        @subreddit = Subreddit.new
     end
 
     def index
@@ -15,11 +15,35 @@ class SubredditsController < ApplicationController
         @subreddits = Subreddit.paginate(:page => params[:page])
     end
 
+    def subscribe
+        @user = current_user
+        @subreddit = Subreddit.find(params[:subreddit_id])
+        @relationship_exists = false
+
+        if @user.has_subbed?(@subreddit)
+            @sub = @user.subscriptions.where("subreddit_id = ?", @subreddit.id).first
+            @relationship_exists = false
+            @subreddit.decrease_user_count
+            @sub.destroy
+            @sub.save!
+        else
+            @user.create_subscription(:subreddit_id => @subreddit.id, :user_id => @user.id).save!
+            @subreddit.increase_user_count
+            @relationship_exists = true
+        end
+        respond_to do |format| 
+            format.html { redirect_to @subreddit }
+            format.js
+        end
+
+    end
+
     def create 
-        @subreddits = Subreddit.create(params[:subreddit])
-        if @subreddits.save 
+        @subreddit = Subreddit.create(params[:subreddit])
+        @subreddit.user_count = 0;
+        if @subreddit.save 
             flash[:success] = "Your subreddit has been created!" 
-            redirect_to @subreddits
+            redirect_to subreddit_path(@subreddit.subname)
         else
             render 'new'
         end

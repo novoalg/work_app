@@ -1,18 +1,26 @@
-<%= provide('title', @subreddits.title) %>
+<%= provide('title', @subreddit.title) %>
 <div class="row">
 <div class="col-xs-6 col-sm-2">
 <div class="list-group">
 
 <a href="#" class="list-group-item">
-<h4><%= @subreddits.subname %></h4>
+<h4><%= @subreddit.subname %></h4>
 </a>
-<a href="<%= '#' %>" class="list-group-item">
-<small class="glyphicon glyphicon-heart"> 0 users subscribed</small>
+<a href="#" class="list-group-item">
+<h3 id="user-count" class="btn btn-default"><%="#{@subreddit.user_count}"%></h3><h5>users are subscribed to this Subreddit!</h5></p>
 </a>
 <a href="#" class="list-group-item">
 <h4>Description:</h4>
-<p><%= @subreddits.description  %></p>
+<p><%= @subreddit.description  %></p>
 </a>
+<br></br>
+<div align="center">
+<% if current_user.has_subbed?(@subreddit) %>
+<%= render 'shared/red_heart' %>
+<% else %>
+<%= render 'shared/reg_heart' %>
+<% end %>
+</div>
 </div>
 </div>
 </div>

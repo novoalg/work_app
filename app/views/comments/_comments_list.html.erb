@@ -1,0 +1,60 @@
+<div class="container">
+<br></br>
+<% @comments.each do |c| %>
+<div class="col-md-8 comment-container">
+    <% if c.post_id == @post.id %>
+
+      <% if current_user.has_comment_voted?(c) %>
+
+      <div class="col-md-1">
+      <% if current_user.votes.where("comment_id =?", c.id).first.direction == "up" %>
+      <!-- ORANGE UPVOTE ARROW -->
+        <%= link_to "", vote_post_comment_path(:comment_id => c.id, :direction => "up",  :format => :js ), :class => "glyphicon glyphicon-arrow-up orange", :id => "up-comment-arrow-#{c.id}",  :remote => true %> 
+      <% else %>
+      <!-- UPVOTE ARROW -->
+        <%= link_to "", vote_post_comment_path(:comment_id => c.id, :direction => "up", :format => :js), :class => "glyphicon glyphicon-arrow-up", :id => "up-comment-arrow-#{c.id}", :remote => true %>
+      <% end %>
+      
+      <% if current_user.votes.where("comment_id =?", c.id).first.direction == "down" %>
+      <!-- BLUE DOWNVOTE ARROW -->
+        <%= link_to "", vote_post_comment_path(:comment_id => c.id, :direction => "down",  :format => :js ), :class => "glyphicon glyphicon-arrow-down blue", :id => "down-comment-arrow-#{c.id}",  :remote => true %> 
+      <% else %>
+      <!-- DOWNVOTE ARROW -->
+        <%= link_to "", vote_post_comment_path(:comment_id => c.id, :direction => "down",  :format => :js ), :class => "glyphicon glyphicon-arrow-down" , :id => "down-comment-arrow-#{c.id}", :remote => true %> 
+      <% end %>
+      </div>
+
+      <% else %>
+      <div class="col-md-1">
+      <!-- UPVOTE ARROW -->
+        <%= link_to "", vote_post_comment_path(:comment_id => c.id, :direction => "up", :format => :js), :class => "glyphicon glyphicon-arrow-up", :id => "up-comment-arrow-#{c.id}", :remote => true %> 
+      <!-- DOWNVOTE ARROW -->
+        <%= link_to "", vote_post_comment_path(:comment_id => c.id, :direction => "down",  :format => :js ), :class => "glyphicon glyphicon-arrow-down" , :id => "down-comment-arrow-#{c.id}", :remote => true %> 
+      </div>
+      <% end %>
+        <div class="col-md-1 blueUser">
+        <%= link_to "#{User.find_by_id(c.user_id).username}-", user_path(User.find(c.user_id).username), :class => "blueUser"%>
+        </div>
+        <div class="col-md-8">
+        &nbsp
+        <small class="karmaUser" id="comment-karma-<%="#{c.id}"%>"><%="#{c.karma}"%></small><small class="karmaUser"><%=" points #{time_ago_in_words(c.created_at)} ago" %></small>
+        </div>
+        <br></br>
+      <div class="col-md-1 col-md-12">
+        <p class="comment-content"><%="#{c.content}"%></p>
+      </div>
+      <div class="col-md-1 col-md-12 links-comments">
+        <%= link_to "permalink", show_user_comment_path(:subname => Post.find_by_id(c.post_id).subname , :post_id => Post.find_by_id(c.post_id), :id => c.id) %>
+        &nbsp
+        </div>
+
+
+    <br></br>
+    <% end %>
+</div>
+<br></br>
+<br></br>
+<br></br>
+<% end %>
+</div>
+

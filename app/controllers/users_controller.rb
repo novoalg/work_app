@@ -38,6 +38,15 @@ class UsersController < ApplicationController
         end
     end
 
+    def votes?(post)
+        @user.votes = Votes.find_by_post_id(post.id)
+    end
+
+    def subscriptions?(subreddit)
+        @user.subscriptions = Subscriptions.find_by_subreddit_id(subreddit.id)
+    end
+
+
     private
     def signed_in_user
         unless logged_in?

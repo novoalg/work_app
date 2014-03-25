@@ -1,19 +1,8 @@
-<div class="container">
-  <div class="col-md-4">
-  
-<%= form_for(@post, :url => posts_path, :method => :post) do |p| %>
 
-<%= provide('title', "Submit a link post!") %>
-<%= render 'shared/error_messages', :object => p.object %>
-<%= p.hidden_field :user_id, :value => current_user.id %>
-<%= p.label :title %>
-<%= p.text_field :title %>
-<%= p.label :url %>
-<%= p.text_field :url %>
-<%= p.label :subname %>
-<%= p.text_field :subname %>
+ <% if current_page?(new_link_post_path)%>
+ <%= render :partial => 'link_post_form' %> 
+ <% else %>
+ <%= render :partial => 'text_post_form' %>
+ <% end %>
 
-<%= p.submit "Submit", :class => "btn btn-small btn-primary"%>
-<% end %>
-</div>
-</div>
+

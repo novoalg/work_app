@@ -1,7 +1,7 @@
 <div class="container">
   <div class="col-md-4">
   
-<%= form_for(@subreddits) do |f| %>
+<%= form_for(@subreddit) do |f| %>
 
 <%= provide('title', "Create your new subreddit") %>
 <%= render 'shared/error_messages', :object => f.object %>
@@ -11,7 +11,7 @@
 <%= f.label :title %>
 <%= f.text_field :title %>
 <%= f.label :description %>
-<%= f.text_field :description%>
+<%= f.text_area :description, :size => "30x10"%>
 <%= f.submit "Create", :class => "btn btn-small btn-primary"%>
 <% end %>
 </div>

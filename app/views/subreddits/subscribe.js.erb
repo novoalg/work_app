@@ -1,0 +1,6 @@
+$("#user-count").html(<%= escape_javascript(@subreddit.user_count.to_s)%>);
+<% if @relationship_exists %>
+   $("#heart").replaceWith('<%=j render 'shared/red_heart' %>'); 
+<% else %>
+   $("#heart").replaceWith('<%=j render 'shared/reg_heart' %>');
+<% end %>

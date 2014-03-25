@@ -1,4 +1,4 @@
-<% if @subreddits.nil? %>
+<% if @subreddit.nil? %>
     <%= render 'shared/not_found' %>
 <% else %>
     <div class="col-xs-s2 col-sm6 col-md-10">
@@ -6,7 +6,7 @@
         <% if @posts %>
             <ol> 
                 <%= render @posts %>
-                <ul class="pagination">
+               <ul>
                     <%= will_paginate @posts %>
                 </ul>
             </ol>

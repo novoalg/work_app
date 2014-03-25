@@ -7,7 +7,11 @@ $grayMediumLight: #eaeaea;
 $grayLight: #e6e6e6;
 $grayDarker: #2E2E2E;
 $grayLighter: #EBEBEB;
-$blue: #2B3E85;
+$green: #00BA22;
+$orange: #e37a33;
+$blue: #009DFF;
+$purple: #2D1D3B;
+$blueLight: #6E8BFF;
 @mixin box_sizing {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -38,7 +42,78 @@ textarea {
   }
 }
 
+
+/* links */
+
+.post-title {
+  background-color:transparent;
+  color: $green;
+  &:hover {
+        color: $green;
+        background-color: transparent;
+  }
+  &:visited {
+    color: $purple !important;
+  } 
+
+}
+
+.link-title {
+    color: $blue;
+    &:hover {
+        background-color: transparent;
+        color: $blueLight;
+    }
+    &:visited {
+        color: $purple;
+    }
+}
+/* comments */
+
+.links-comments {
+    color: $grayDarker;
+    font: 15px bold;
+}
+
+.comment-container {
+    border: 1px solid #E3E3E3;
+}
+/* arrow color */
+
+.blue {
+    color: blue;
+}
+.orange {
+    color: $orange;
+}
+.red {
+    color: red;
+}
+.green {
+    color: green;
+}
+
 /* typography */
+
+.comment-content {
+    padding-left: 40px;
+}
+
+.blueUser {
+    color: $blueLight;
+    &:hover {
+        background-color: transparent;
+        color: $blueLight;
+    }
+
+    font-weight: bold;
+}
+
+.karmaUser {
+    color: $grayLight;
+    font-weight: bold;
+}
+
 
 h1, h2, h3, h4, h5, h6 {
   line-height: 1;
@@ -60,11 +135,15 @@ h2 {
   color: $grayLight;
 }
 
+
 p {
   font-size: 1.1em;
   line-height: 1.7em;
 }
 
+.comments {
+    font-size:small;
+}
 
 /* header */
 
@@ -79,8 +158,9 @@ p {
   font-weight: bold;
   line-height: 1;
   &:hover {
-    color: #888178;
+    color: $grayDarker;
     text-decoration: none;
+    background-color: transparent;
   }
 }
 
@@ -94,7 +174,7 @@ footer {
   a {
     color: $gray;
     &:hover {
-      color: $grayDarker;
+      background-color: $grayLight;
     }
   }
   small {
@@ -108,65 +188,6 @@ footer {
       margin-left: 10px;
     }
   }
-}
-
-/* sidebar */
-
-aside {
-  section {
-    padding: 10px 0;
-    border-top: 1px solid $grayLighter;
-    &:first-child {
-      border: 0;
-      padding-top: 0;
-    }
-    span {
-      display: block;
-      margin-bottom: 3px;
-      line-height: 1;
-    }
-    h1 {
-      font-size: 1.4em;
-      text-align: left;
-      letter-spacing: -1px;
-      margin-bottom: 3px;
-      margin-top: 0px;
-    }
-  }
-}
-.stats {
-  overflow: auto;
-  a {
-    float: left;
-    padding: 0 10px;
-    border-left: 1px solid $grayLighter;
-    color: gray;
-    &:first-child {
-      padding-left: 0;
-      border: 0;
-    }
-    &:hover {
-      text-decoration: none;
-      color: $blue;
-    }
-  }
-  strong {
-    display: block;
-  }
-}
-
-.user_avatars {
-  overflow: auto;
-  margin-top: 10px;
-  .gravatar {
-    margin: 1px 1px;
-  }
-}
-
-
-.gravatar {
-  float: left;
-  margin-right: 10px;
 }
 /* misc */
 
@@ -205,46 +226,6 @@ input {
   @extend .error;
 }
 
-/* users index */
 
-.users {
-    list-style: none;
-    margin: 0;
-    li {
-        overflow: auto;
-        padding: 10px 0;
-        border-top: 1px solid $grayLighter;
-        &:last-child {
-            border-bottom: 1px solid $grayLighter;
-        }
-    }
-}
 
-/* microposts */
-
-.microposts {
-  list-style: none;
-  margin: 10px 0 0 0;
-
-  li {
-    padding: 10px 0;
-    border-top: 1px solid #e8e8e8;
-  }
-}
-.content {
-  display: block;
-}
-.timestamp {
-  color: $grayLight;
-}
-.gravatar {
-  float: left;
-  margin-right: 10px;
-}
-aside {
-  textarea {
-    height: 100px;
-    margin-bottom: 5px;
-  }
-}
 

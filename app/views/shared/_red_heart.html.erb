@@ -1,0 +1,1 @@
+<%= link_to " unsubscribe", subscribe_subreddit_path(:subreddit_id => @subreddit.id, :user_id => current_user.id, :format => :js), :class => "glyphicon glyphicon-minus red", :id => "heart", :remote => true %>

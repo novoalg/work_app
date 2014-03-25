@@ -1,0 +1,2 @@
+$("#upvote_form").html("<%= escape_javascript(render('post/upvote')) %>")
+$("#upvote").html('<%= @post.upvotes.count %>')
