@@ -7,16 +7,37 @@ class CommentsController < ApplicationController
         @comment.post_id = @post.id
         @comments = Comment.where(:post_id => @post.id)
         sub_id = Subreddit.find_by_subname(@post.subname)
-        if @comment.save
-            redirect_to subreddit_post_path(Subreddit.find_by_subname(@post.subname).id, @post.id)
-        else
-            render 'new'
-        end
-       
+        @comment.save
+        redirect_to subreddit_post_path(Subreddit.find_by_subname(@post.subname).id, @post.id)
     end
+
+    def reply
+
+        #@comment = Comment.create(params[:comment])
+        @user = current_user
+        @post = Post.find_by_id(params[:post_id])
+
+        #@comment.karma = 0
+        #@comment.user_id = @user.id
+        #@comment.post_id = @post.id
+
+        #@replied_to_comment = Comment.find(params[:comment_id])
+
+        #@user.build_reply(:user_id => @user.id, :comment_id => @replied_to_comment.id)
+        #@comment.save
+        #redirect_to subreddit_post_path(Subreddit.find_by_subname(@post.subname).id, @post.id)
+        respond_to do |format| 
+            format.html { redirect_to subreddit_post_path(Subreddit.find_by_subname(@post.subname).id, @post.id)}
+            format.js
+        end
+
+
+    end
+
     def new
         @comment = Comment.new(params[:id])
         @post = Post.find(params[:post_id])
+        @subreddit = Subreddit.find_by_subname(@post.subname)
     end 
 
     def show

@@ -19,7 +19,7 @@ class Subreddit < ActiveRecord::Base
   validates :user_id, :presence => true
   default_scope :order => 'LOWER(subname) ASC' 
   VALID_SUBNAME_REGEX = /^([a-zA-Z]{3,}|[a-zA-Z]{1,}[0-9]{1,}|[a-zA-Z]{1,}[0-9]{1,}[a-zA-Z]{1,}|[\w]{3,}[a-zA-Z]|[a-zA-Z]+[\w]+[0-9]+|[a-z]{3,}[0-9])$/
-  validates :subname, :presence => true, :uniqueness => true, :length => { :maximum => 15 }, :format => { :with => VALID_SUBNAME_REGEX }
+  validates :subname, :presence => true, :uniqueness => true, :length => { :maximum => 30 }, :format => { :with => VALID_SUBNAME_REGEX }
   validates :title, :presence => true
   validates :description, :presence => true
   def to_param

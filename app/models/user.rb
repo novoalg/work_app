@@ -16,10 +16,12 @@ class User < ActiveRecord::Base
   validates :username, :uniqueness => true, :presence => true, :length => { :minimum => 3, :maximum => 20 }
   has_many :subreddits, :dependent => :destroy
   has_many :votes
+  has_many :replies
   has_many :comments
   has_many :subscriptions
   belongs_to :post
   belongs_to :vote
+  belongs_to :reply
   belongs_to :subscription
   #before_save { |user| user.email = email.downcase }
   #before_save :create_remember_token

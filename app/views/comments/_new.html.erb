@@ -1,11 +1,11 @@
-<div class="container">
-  <div class="col-md-8">
+<div class="row">
+  <div class="small-7 medium-8 large-8 columns">
     <div class="field">
     <%= form_for(@comment) do |c| %>
       <%= c.text_area :content, :placeholder => "Submit a comment...", :size => "30x4" %>
       <%= c.hidden_field :post_id, :value => @post.id %>
       <%= c.hidden_field :subreddit_id, :value => @sub.id %>
-      <div class="col-md-2">
+      <div class="small-8 medium-5 large-3 columns">
       <%= c.submit "submit", :class => "btn btn-small btn-primary" %>
       </div>
   </div>

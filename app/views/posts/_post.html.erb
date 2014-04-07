@@ -1,25 +1,15 @@
-<div class="row">
-<div class="col-xs-s2 col-sm6 col-md-10">
-<hr></hr>
-<div class="col-md-1">
-<div align="center"> 
-<h4><%="#{post.karma}"%></h4>
-</div>
-</div>
-<% if !post.url.nil? && post.description.nil?%>
-<h4><%= link_to "#{post.title}", "#{post.url}", :class => "link-title" %></h4>
-<small>submitted <%= time_ago_in_words(post.created_at)%> ago by <%= link_to "#{User.find(post.user_id).username}", user_path(User.find(post.user_id).username)%>  |</small>
-<small><%= link_to "#{Comment.where(:post_id => post.id).count} comments ", subreddit_post_path(post.subname, post.id) %>|<%= link_to ' share', '#'%></small>
-
-<% else %>
-
-<h4><%= link_to "#{post.title}", subreddit_post_path(post.subname, post.id), :class => "post-title" %></h4>
-<small>submitted <%= time_ago_in_words(post.created_at)%> ago by <%= "#{User.find(post.user_id).username}"%> |</small>
-<small><%= link_to "#{Comment.where(:post_id => post.id).count} comments " , subreddit_post_path(post.subname, post.id) %>|<%= link_to ' share', '#'%></small>
-
-<% end %>
-
-<br></br>
-<hr></hr>
-</div>
-</div>
+        <hr></hr>
+        <div class="large-1 columns" align="center">
+                <h4><%="#{post.karma}"%></h4>
+        </div>
+        <% if !post.url.nil? && post.description.nil?%>
+            <h4><%= link_to "#{post.title}", "#{post.url}", :class => "link-title" %></h4>
+            <small>submitted <%= time_ago_in_words(post.created_at)%> ago by <%= link_to "#{User.find(post.user_id).username}", user_path(User.find(post.user_id).username)%>  |</small>
+            <small><%= link_to "#{Comment.where(:post_id => post.id).count} comments ", subreddit_post_path(post.subname, post.id) %>|<%= link_to ' share', '#'%></small>
+        <% else %>
+            <h4><%= link_to "#{post.title}", subreddit_post_path(post.subname, post.id), :class => "post-title" %></h4>
+            <small>submitted <%= time_ago_in_words(post.created_at)%> ago by <%= "#{User.find(post.user_id).username}"%> |</small>
+            <small><%= link_to "#{Comment.where(:post_id => post.id).count} comments " , subreddit_post_path(post.subname, post.id) %>|<%= link_to ' share', '#'%></small>
+        <% end %>
+        <br></br>
+        <hr></hr>

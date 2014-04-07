@@ -18,6 +18,7 @@ class Post < ActiveRecord::Base
   belongs_to :user
   belongs_to :subreddit
   default_scope :order => 'posts.karma DESC' && 'posts.created_at DESC'
+  #scope :hot => 'posts.score DESC'
   #default_scope :order => 'posts.created_at DESC'
   has_many :votes
   has_many :comments #, :foreign_key => "user_id"
@@ -37,4 +38,22 @@ class Post < ActiveRecord::Base
     self.karma -= 1 
     self.save!
   end
+  
+  def hot
+        @subreddit = Subreddit.find_by_subname(params[:id])
+        @posts = Post.where(:subname => @subreddit.subname)
+        s = karma
+        order = Math.log10([s.abs, 1].max)
+        if s > 0
+            sign = 1
+        elsif s < 0
+            sign = -1
+        else
+            sign = 0
+        end
+        seconds = Date.today - 1134028003.seconds
+        @result = (order + sign * seconds.to_i / 45000).round
+        @posts = Post.by_order(@result).all
+    end
+
 end

@@ -1,54 +1,49 @@
 <div class="row">
-<div class="col-xs-s2 col-sm6 col-md-10">
-<div class="col-md-1">
-<div align="center"> 
-<% if current_user.has_voted?(@post) %>
-<% if current_user.votes.where("post_id =?", @post.id).first.direction == "up" %>
-<%= render 'posts/upvote_arrow_or' %>
-<% else %>
-  <%= render 'posts/upvote_arrow' %>
-<% end %>
-<%= render 'posts/karma_master' %>
-<% if current_user.votes.where("post_id =?", @post.id).first.direction == "down" %>
-<%= render 'posts/downvote_arrow_blu' %>
-<% else %>
-  <%= render 'posts/downvote_arrow' %>
-<% end %>
-<% else %>
-  <%= render 'posts/upvote_arrow' %>
-  <h4 id="karma"> <%= "#{@post.karma}" %></h4>
-  <%= render 'posts/downvote_arrow' %>
-  <% end %>
-</div>
-</div>
+<br/>
+<div class="small-6 medium-8 large-9 columns">
 
-
-<% if !@post.url.nil? && @post.description.nil?%>
-
-<h4><%= link_to "#{@post.title}", "#{@post.url}", :class => "link-title" %></h4>
-<small>submitted <%= time_ago_in_words(@post.created_at)%> ago by <%= link_to "#{User.find(@post.user_id).username}", user_path(User.find(@post.user_id).username)%> |</small>
-<small><%= link_to "#{Comment.where(:post_id => @post.id).count} comments ", subreddit_post_path(@post.subname, @post.id) %>|<%= link_to ' share', '#'%></small>
-
-<% else %>
-
-<h4><%= link_to "#{@post.title}", subreddit_post_path(@post.subname, @post.id), :class => "post-title" %></h4>
-<small>submitted <%= time_ago_in_words(@post.created_at)%> ago by <%= link_to "#{User.find(@post.user_id).username}", user_path(User.find(@post.user_id).username)%> |</small>
-<small><%= link_to "#{Comment.where(:post_id => @post.id).count} comments ", subreddit_post_path(@post.subname, @post.id) %>|<%= link_to ' share', '#'%></small>
-<br></br>
-<br></br>
-<div class="container">
-<div class="jumbotron col-md-11" align="left">
-<small><%= @post.description %></small>
-</div>
+<div class="small-2 medium-1 large-1 columns">
+        <% if current_user.has_voted?(@post) %>
+        <% if current_user.votes.where("post_id =?", @post.id).first.direction == "up" %>
+            <%= render 'posts/upvote_arrow_or' %>
+        <% else %>
+            <%= render 'posts/upvote_arrow' %>
+        <% end %>
+        <%= render 'posts/karma_master' %>
+        <% if current_user.votes.where("post_id =?", @post.id).first.direction == "down" %>
+            <%= render 'posts/downvote_arrow_blu' %>
+        <% else %>
+            <%= render 'posts/downvote_arrow' %>
+        <% end %>
+        <% else %>
+            <%= render 'posts/upvote_arrow' %>
+            <h4 id="karma"><%= "#{@post.karma}" %></h4>
+            <%= render 'posts/downvote_arrow' %>
+        <% end %>
 </div>
 
+    <% if !@post.url.nil? && @post.description.nil?%>
 
-<% end %>
-<hr></hr>
-<h3><small>top 200 comments</small></h3>
-<hr></hr>
-<%= render 'comments/new' %>
-<%= render 'comments/comments_list' %>
-<%= will_paginate @comments %>
+        <h4><%= link_to "#{@post.title}", "#{@post.url}", :class => "link-title" %></h4>
+        <small>submitted <%= time_ago_in_words(@post.created_at)%> ago by <%= link_to "#{User.find(@post.user_id).username}", user_path(User.find(@post.user_id).username)%> |</small>
+        <small><%= link_to "#{Comment.where(:post_id => @post.id).count} comments ", subreddit_post_path(@post.subname, @post.id) %>|<%= link_to ' share', '#'%></small>
+    <% else %>
+        <h4><%= link_to "#{@post.title}", subreddit_post_path(@post.subname, @post.id), :class => "post-title" %></h4>
+        <small>submitted <%= time_ago_in_words(@post.created_at)%> ago by <%= link_to "#{User.find(@post.user_id).username}", user_path(User.find(@post.user_id).username)%> |</small>
+        <small><%= link_to "#{Comment.where(:post_id => @post.id).count} comments ", subreddit_post_path(@post.subname, @post.id) %>|<%= link_to ' share', '#'%></small>
+        <br></br>
+        <br></br>
+        <div class="jumbotron medium-10 large-10 columns" align="left">
+            <small><%= @post.description %></small>
+        </div>
+    <% end %>
+
+    <hr></hr>
+    <h3><small>top 200 comments</small></h3>
+    <hr></hr>
+    <%= render 'comments/new' %>
+    <%= render 'comments/comments_list' %>
+    <%= will_paginate @comments %>
 </div>
+    <%= render 'shared/subreddit_sidebar' %>
 </div>

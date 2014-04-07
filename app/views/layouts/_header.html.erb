@@ -1,26 +1,30 @@
-<header class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-    <div class="navbar-header">
+<div class="contain-to-grid sticky">
+<header class="top-bar" data-topbar>
+    <ul class="title-area">
+    <li class="name">
       <%= link_to "UWEC-reddit", root_path, :id => "logo" %>
-    </div>
+    </li>
+    <li class="toggle-topbar menu-icon"><a href="#">Menu</a></li>
+    </ul>
 
-      <nav class="nav navbar-nav navbar-left">
-        <ul class="nav navbar-nav">
-           <li><%= link_to "Hot", '#' %></li>
-           <li><%= link_to "New", '#' %></li>
-           <li><%= link_to "Subreddits", subreddits_path%></li>
-      </nav>
-      <nav class="nav navbar-nav navbar-right">
+    <div class="top-bar-section">
+      <ul class="right">
           <% if logged_in? %>
             <li><%=link_to current_user.username + "(0)(0)", current_user%></li>
-            <li><%= link_to '', messages_path, :class => "glyphicon glyphicon-envelope"%></li>
-            <li><%= link_to '', edit_user_path(current_user), :class => "glyphicon glyphicon-cog"%></li>
+            <li><%= link_to '', messages_path, :class => "foundicon-mail"%></li>
+            <li><%= link_to '', edit_user_path(current_user), :class => "foundicon-tools"%></li>
             <li><%= link_to 'logout', signout_path, :method => "delete"%></li>
           <% else %>
     	      <span>want to join? <%= link_to "login", signin_path %> or 
               <%= link_to "register", signup_path%></span>
           <% end %>
         </ul>
-      </nav>
-  </div>
+        <ul class="left ">
+           <li><%= link_to "Hot", '#' %></li>
+           <li><%= link_to "New", '#' %></li>
+           <li><%= link_to "Subreddits", subreddits_path%></li>
+      </ul>
+
+    </div>
 </header>
+</div>

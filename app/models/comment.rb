@@ -19,7 +19,7 @@ class Comment < ActiveRecord::Base
   validates :post_id, :presence => true
   default_scope :order => 'karma DESC' && 'created_at DESC'
   has_many :votes
-  has_many :comments
+  has_many :replies
   belongs_to :post
   belongs_to :user
 

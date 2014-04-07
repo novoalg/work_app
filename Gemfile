@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.16'
+gem 'foundation-rails'
 gem 'bootstrap-sass', '~> 3.1.1'
 gem 'faker', '1.0.1'
 gem 'will_paginate', '~> 3.0.5' 

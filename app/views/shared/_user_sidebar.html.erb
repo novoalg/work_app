@@ -1,16 +1,13 @@
  <div class="row">
-<div class="col-xs-6 col-sm-2">
-
-<a href="#" class="list-group-item">
+<div class="large-3 columns">
+<div class="panel callout">
 <h3 align="center"><%= @user.username%></h3>
-</a>
-
-<a href="#" class="list-group-item">
-<h3 class="btn btn-default" >0</h3><h2 class="btn btn-small">link karma</h2>
-</a>
-
-<a href="#" class="list-group-item">
-<h3 class="btn btn-default">0</h3><h2 class="btn btn-small">comment karma</h2>
-</a>
+</div>
+<div class="panel ">
+<h2><%=@link_karma%> link karma</h2>
+</div>
+<div class="panel ">
+<h2><%=@comment_karma%> comment karma</h2>
+</div>
  </div>
 </div>

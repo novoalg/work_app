@@ -1,10 +1,11 @@
 
-@import "bootstrap";
+@import "foundation_and_overrides";
+@import "foundicons";
 
 /* mixins, variables, etc. */
 
 $grayMediumLight: #eaeaea;
-$grayLight: #e6e6e6;
+$grayLight: #B5B5B5;
 $grayDarker: #2E2E2E;
 $grayLighter: #EBEBEB;
 $green: #00BA22;
@@ -23,13 +24,6 @@ html {
   overflow-y: scroll;
 }
 
-body {
-  padding-top: 60px;
-}
-
-section {
-  overflow: auto;
-}
 
 textarea {
   resize: vertical;
@@ -42,8 +36,43 @@ textarea {
   }
 }
 
+.row .row {
+
+    margin-bottom: 10px;
+}
+
+.custom-panel {
+  @include panel(
+    // Sets the panel background color. Default: $panel-pg
+    $bg:#2BB6E0,
+    // Sets the panel padding amount. Default: $panel-padding
+    $padding:20px,
+    // Sets the font color based on the darkness of the bg & resets header line-heights for panels. Default: $panel-header-adjust
+    $adjust:true
+  );
+}
+
+/* subreddit sidebar */
+
+.sub-button {
+
+    border: 1px solid #E3E3E3;
+    
+}
 
 /* links */
+
+.jumbotron {
+   padding-top: 50px;
+   margin-left: auto;
+   padding-bottom: 50px;
+   margin-bottom: 10px;
+   background-color: #D4D4D4;
+}
+
+.karma-content {
+    margin-top: 10px;
+}
 
 .post-title {
   background-color:transparent;
@@ -55,6 +84,7 @@ textarea {
   &:visited {
     color: $purple !important;
   } 
+
 
 }
 
@@ -77,6 +107,9 @@ textarea {
 
 .comment-container {
     border: 1px solid #E3E3E3;
+    padding-bottom: 10px;
+    padding-top: 10px;
+
 }
 /* arrow color */
 
@@ -96,6 +129,8 @@ textarea {
 /* typography */
 
 .comment-content {
+    margin-bottom: 10px;
+    margin-top: 10px;
     padding-left: 40px;
 }
 
@@ -122,7 +157,8 @@ h1, h2, h3, h4, h5, h6 {
 h1 {
   font-size: 3em;
   letter-spacing: -2px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
+  margin-top: 15px;
   text-align: center;
 }
 
@@ -144,6 +180,14 @@ p {
 .comments {
     font-size:small;
 }
+/* MOTD */
+
+.motd {
+    background-color: #D5DFE8;
+    //margin: 0px;
+    //width:100%;
+
+}
 
 /* header */
 
@@ -151,7 +195,7 @@ p {
   float: left;
   margin-right: 10px;
   font-size: 1.7em;
-  color: black;
+  color: white;
   text-transform: uppercase;
   letter-spacing: -1px;
   padding-top: 9px;
@@ -164,15 +208,19 @@ p {
   }
 }
 
+small {
+    font-size: 80%;
+}
+
 /* footer */
 
 footer {
   margin-top: 45px;
+  margin-left: 10px;
   padding-top: 5px;
   border-top: 1px solid $grayMediumLight;
   color: $grayLight;
   a {
-    color: $gray;
     &:hover {
       background-color: $grayLight;
     }
@@ -189,6 +237,16 @@ footer {
     }
   }
 }
+
+/* sidebar */
+
+.sidebar {
+    width: 300px;
+    float: right;
+    background-color: #4F869E;
+    
+}
+
 /* misc */
 
 .debug_dump {
@@ -226,6 +284,33 @@ input {
   @extend .error;
 }
 
+/* zurb icons */
 
-
-
+@font-face {
+  font-family: '[set]Foundicons';
+  src: url('fonts/[set]_foundicons.eot');
+  src: url('fonts/[set]_foundicons.eot?#iefix') format('embedded-opentype'),
+       url('fonts/[set]_foundicons.woff') format('woff'),
+       url('fonts/[set]_foundicons.ttf') format('truetype'),
+       url('fonts/[set]_foundicons.svg#[set]Foundicons') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+ 
+[class*="foundicon-"] {
+  display: inline;
+  width: auto;
+  height: auto;
+  line-height: inherit;
+  vertical-align: baseline;
+  background-image: none;
+  background-position: 0 0;
+  background-repeat: repeat;
+}
+ 
+[class*="foundicon-"]:before {
+  font-family: "[set]Foundicons";
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+}

@@ -4,6 +4,9 @@ class SubredditsController < ApplicationController
         logger.info "******************#{@subreddit.inspect}"
         @posts = Post.where(:subname => @subreddit.subname)
         @posts = @posts.paginate(:page => params[:page], :per_page => 15)
+        @posts.each do |p|
+            p.karma = p.votes.where(:direction => "up").count - p.votes.where(:direction => "down").count
+        end
     end
 
     def new
@@ -50,6 +53,24 @@ class SubredditsController < ApplicationController
     end
    
     def destroy
+    end
+
+
+    def sort(karma)
+        @subreddit = Subreddit.find_by_subname(params[:id])
+        @posts = Post.where(:subname => @subreddit.subname)
+        s = karma
+        order = Math.log10([s.abs, 1].max)
+        if s > 0
+            sign = 1
+        elsif s < 0
+            sign = -1
+        else
+            sign = 0
+        end
+        seconds = Date.today - 1134028003.seconds
+        @result = (order + sign * seconds.to_i / 45000).round
+        @posts = Post.by_order(@result).all
     end
 
 end

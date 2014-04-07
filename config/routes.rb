@@ -1,6 +1,9 @@
 WorkApp::Application.routes.draw do
   resources :votes, :only => [:new, :create, :destroy]
   resources :subscriptions, :only => [:new, :create, :destroy]
+  resources :replies, :only => [:new, :create, :destroy]
+  resources :posts, :only => [:new, :create]
+  resources :comments, :only => [:show, :new, :create]
 
 
   resources :users
@@ -9,8 +12,7 @@ WorkApp::Application.routes.draw do
       resources :comments, :except => [:create, :show, :new, :destroy]
     end
   end
-  resources :posts, :only => [:new, :create]
-  resources :comments, :only => [:show, :new, :create]
+  match '/reply_comment/', :to => 'comments#reply', :as => 'reply_to_comment', :via => :get
   match '/vote', :to => 'posts#vote', :as => 'vote_subreddit_post', :via => :get
   match '/vote_comment', :to => 'comments#vote', :as => 'vote_post_comment', :via => :get
   match '/posts/new_link', :to => 'posts#new', :as => 'new_link_post', :via => :get

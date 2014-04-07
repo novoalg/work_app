@@ -1,12 +1,9 @@
+<br/>
 <% if @user.nil? %>
     <%= render 'shared/user_not_found' %>
 <% else %>
-    <div class="col-md-10">
-	<h2 class="col-md-2">Overview for <%= @user.username%><hr></hr></h2>
-    <br></br>
-    <br></br>
-    <br></br>
-    <br></br>
+    <div class="large-9 columns">
+	<h2 class="large-5 columns">Overview for <%= @user.username%><hr></hr></h2>
     <%= render 'shared/user_comments' %>
     <br></br>
     <%= render 'shared/user_posts' %>

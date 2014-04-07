@@ -1,5 +1,5 @@
-<div class="container">
-  <div class="col-md-4">
+<div class="row large-4 columns">
+<br/>
 <%= form_for(@post, :url => posts_path, :method => :post) do |p| %>
 
 <%= provide('title', "Submit a link post!") %>
@@ -12,9 +12,8 @@
 <%= p.label :text%>&nbsp<small>(optional)</small>
 <%= p.text_area :description, :size => "40x10" %>
 <%= p.label :choose_a_subname %>
-<%= p.text_field :subname %>
+<%= p.text_field :subname, :value => @subname %>
 
 <%= p.submit "Submit", :class => "btn btn-small btn-primary"%>
 <% end %>
-</div>
 </div>

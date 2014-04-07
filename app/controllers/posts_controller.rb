@@ -7,6 +7,7 @@ class PostsController < ApplicationController
     
     def new
       @post = Post.new(params[:subreddit_id])
+      @subname = params[:subname]
     end
 
     def create 
@@ -19,42 +20,41 @@ class PostsController < ApplicationController
         else
             url
         end
-
         @post = Post.create(params[:post]) 
         @post.user_id = current_user.id
         @post.karma = 0
         sub = Subreddit.find_by_subname(params[:post][:subname])
         unless sub.nil?
-        sub_id = sub.id
-            if @post.save
+            if @post.save!
                 flash[:success] = "Your post has been created!"
-                redirect_to subreddit_post_path(sub_id, @post.id)
-            else
-            if params[:post][:is_link] == "true"
+                redirect_to subreddit_post_path(sub.subname, @post.id)
+            elsif params[:post][:is_link] == "true"
                  render 'posts/_link_post_form'                
             else
                  render 'posts/_text_post_form'                
-             end       
-
-            end
+             end
         else
             @post.errors.add(:base, "Subreddit does not exist.")
             if params[:post][:is_link] == "true"
                  render 'posts/_link_post_form'                
             else
                  render 'posts/_text_post_form'                
-             end       
+             end
         end
     end
 
     def show
         @post = Post.find_by_id(params[:id])
+        @post.karma = @post.votes.where(:direction => "up").count - @post.votes.where(:direction => "down").count
         @comment = Comment.new
+        @reply = Reply.new
         @comments = Comment.where(:post_id => @post.id)
         @comments = Comment.paginate(:page => params[:page])
-        @vote = current_user.build_vote
+        #@vote = current_user.build_vote
+        @subreddit = Subreddit.find_by_subname(@post.subname)
         @sub = Subreddit.find_by_subname(@post.subname)
     end
+
     
     def destroy
     end
