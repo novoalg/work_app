@@ -5,7 +5,7 @@
     <div class="col-md-1">
     <h4><%="#{p.karma}"%></h4>
     </div>
-<% if !p.url.nil? && p.description.nil?%>
+    <% if !p.url.nil? && p.description.nil?%>
     <h4><%= link_to "#{p.title}", "#{p.url}", :class => "link-title" %></h4>
     <small>submitted <%= time_ago_in_words(p.created_at)%> ago by <%= link_to "#{User.find(p.user_id).username}", user_path(User.find(p.user_id).username)%> to <%= link_to "#{p.subname} ", subreddits_path + "/#{p.subname}"%>|</small>
     <small><%= link_to "#{Comment.where(:post_id => p.id).count} comments ", subreddit_post_path(p.subname, p.id)%> | <%= link_to " share", '#' %></small>

@@ -1,10 +1,10 @@
-<% if current_user.has_voted?(@post)%>
-    <% if current_user.votes.where("post_id =?", @post.id).first.direction == "up"%> 
-        <%= render 'posts/karma_or' %>
-<% end %>
-    <% if current_user.votes.where("post_id =?", @post.id).first.direction == "down"%> 
-        <%= render 'posts/karma_blu' %>
+<% if current_user.has_voted?(post)%>
+    <% if current_user.votes.where("post_id =?", post.id).first.direction == "up"%> 
+        <%= render 'posts/karma_or', :post => post %>
+    <% end %>
+    <% if current_user.votes.where("post_id =?", post.id).first.direction == "down"%> 
+        <%= render 'posts/karma_blu', :post => post %>
     <% end %>
 <% else %>
-    <%= render 'posts/karma_norm' %> 
+    <%= render 'posts/karma_norm', :post => post %> 
 <% end %>

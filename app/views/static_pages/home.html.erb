@@ -1,8 +1,33 @@
-<div class="row ">
 <div class="large-12 columns motd">
-<h1> Welcome to my brand new application! </h1>
+<dl class="accordion" data-accordion>
+  <dd>
+    <a href="#panel1">Posts</a>
+    <div id="panel1" class="content active">
+      <dl class="tabs" data-tab>
+        <dd class="active"><a href="#panel2-1">All</a></dd>
+        <dd><a href="#panel2-2">Subscriptions</a></dd>
+        <dd><a href="#panel2-3">Links</a></dd>
+      </dl>
+      <div class="tabs-content">
+        <div class="content active" id="panel2-1">
+            <% if @all_posts %>
+                <%= render @all_posts %>
+            <% end %>      
+        </div>
+        <div class="content" id="panel2-2">
+            <% if @posts %>
+                <%= render @posts %>
+            <% end %>
+        </div>
+        <div class="content" id="panel2-3">
+        <h2><%= link_to "Start a new subreddit!", new_subreddit_path %></h2>
+        <h2><%= link_to "Submit a link post!", new_link_post_path %></h2>
+        <h2><%= link_to "Submit a text post!", new_text_post_path  %></h2>
+        </div>
+      </div>
+    </div>
+  </dd>
+  <dd>
+</dl>
 </div>
-</div>
-<%= render 'shared/feed' %>
-<%= render '/shared/sidebar'%>
 

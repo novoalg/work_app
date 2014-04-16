@@ -25,7 +25,7 @@ class PostsController < ApplicationController
         @post.karma = 0
         sub = Subreddit.find_by_subname(params[:post][:subname])
         unless sub.nil?
-            if @post.save!
+            if @post.save
                 flash[:success] = "Your post has been created!"
                 redirect_to subreddit_post_path(sub.subname, @post.id)
             elsif params[:post][:is_link] == "true"
@@ -45,12 +45,13 @@ class PostsController < ApplicationController
 
     def show
         @post = Post.find_by_id(params[:id])
-        @post.karma = @post.votes.where(:direction => "up").count - @post.votes.where(:direction => "down").count
+        @post.karma = @post.votes.where(:post_id => @post.id, :direction => "up").count - @post.votes.where(:post_id => @post.id, :direction => "down").count
         @comment = Comment.new
-        @reply = Reply.new
-        @comments = Comment.where(:post_id => @post.id)
         @comments = Comment.paginate(:page => params[:page])
-        #@vote = current_user.build_vote
+        @comments = Comment.where(:post_id => @post.id)
+        ids = @comments.map(&:id)
+        @replies = Reply.where('comment_id in (?)',  ids)
+        #logger.info "**********REPLIES FROM CONTROLLER #{@replies.inspect}"
         @subreddit = Subreddit.find_by_subname(@post.subname)
         @sub = Subreddit.find_by_subname(@post.subname)
     end

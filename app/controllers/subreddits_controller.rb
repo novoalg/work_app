@@ -1,10 +1,11 @@
 class SubredditsController < ApplicationController
     def show
         @subreddit = Subreddit.find_by_subname(params[:id])
-        logger.info "******************#{@subreddit.inspect}"
-        @posts = Post.where(:subname => @subreddit.subname)
-        @posts = @posts.paginate(:page => params[:page], :per_page => 15)
-        @posts.each do |p|
+        @subreddit.user_count = @subreddit.subscriptions.count
+        @post = Post.where(:subname => @subreddit.subname)
+        logger.info "******************#{@post.inspect}"
+        @post = @post.paginate(:page => params[:page], :per_page => 15)
+        @post.each do |p|
             p.karma = p.votes.where(:direction => "up").count - p.votes.where(:direction => "down").count
         end
     end
@@ -16,6 +17,19 @@ class SubredditsController < ApplicationController
     def index
         @subreddits = Subreddit.all
         @subreddits = Subreddit.paginate(:page => params[:page])
+        @subreddit_subscriptions = Subreddit.where('id in (?)', current_user.subscriptions.map(&:subreddit_id))
+    end
+
+    def edit
+        @subreddit = Subreddit.find(params[:id])
+    end
+
+    def update
+        @subreddit = Subreddit.find(params[:id])
+        if @subreddit.update_attributes(params[:user])
+            flash[:success] = "Updated successfully"
+            redirect_to @subreddit
+        end
     end
 
     def subscribe
@@ -45,6 +59,8 @@ class SubredditsController < ApplicationController
         @subreddit = Subreddit.create(params[:subreddit])
         @subreddit.user_count = 0;
         if @subreddit.save 
+            current_user.create_subscription(:subreddit_id => @subreddit.id, :user_id => current_user.id).save!
+            @subreddit.increase_user_count
             flash[:success] = "Your subreddit has been created!" 
             redirect_to subreddit_path(@subreddit.subname)
         else

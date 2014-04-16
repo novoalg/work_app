@@ -9,6 +9,7 @@
 #  updated_at  :datetime         not null
 #  title       :string(255)
 #  description :string(255)
+#  user_count  :integer          default(0)
 #
 
 class Subreddit < ActiveRecord::Base

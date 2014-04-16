@@ -1,12 +1,32 @@
-<br/>
-<div class="large-8 columns">
-<% @subreddits.each do |s| %>
-<div class="row panel">
-
-    <h3><%= link_to "#{s.subname}: #{s.title}", subreddits_path + "/#{s.subname}"%> <small class="green"><%= "#{s.user_count}"%> users subscribed</small></h3>
-    <h4 class="list-group-item-heading"><%= s.description %></h4>
-    <%= will_paginate @subreddits %>
+<div class="large-12 columns motd">
+<dl class="accordion" data-accordion>
+  <dd>
+    <a href="#panel1">Subreddits</a>
+    <div id="panel1" class="content active">
+      <dl class="tabs" data-tab>
+        <dd class="active"><a href="#panel2-1">All</a></dd>
+        <dd><a href="#panel2-2">Subscriptions</a></dd>
+      </dl>
+<div class="tabs-content">
+    <div class="content active" id="panel2-1">
+        <% @subreddits.each do |s| %>
+        <div class="panel">
+            <h3><%= link_to "#{s.subname}: #{s.title}", subreddits_path + "/#{s.subname}"%> <small class="green"><%= "#{s.user_count}"%> users subscribed</small></h3>
+            <h4 class="list-group-item-heading"><%= s.description %></h4>
+            <%= will_paginate @subreddits %>
+        </div>
+        <% end %>
+    </div>
+<div class="content" id="panel2-2">
+    <% @subreddit_subscriptions.each do |s| %>
+    <div class="panel">
+        <h3><%= link_to "#{s.subname}: #{s.title}", subreddits_path + "/#{s.subname}"%> <small class="green"><%= "#{s.user_count}"%> users subscribed</small></h3>
+        <h4 class="list-group-item-heading"><%= s.description %></h4>
+        <%= will_paginate @subreddit_subscription %>
+    </div>
+    <% end %>
 </div>
-<% end %>
 </div>
-<%= render 'shared/sidebar' %>
+  </dd>
+</dl>
+</div>

@@ -10,7 +10,7 @@
     <div class="top-bar-section">
       <ul class="right">
           <% if logged_in? %>
-            <li><%=link_to current_user.username + "(0)(0)", current_user%></li>
+            <li><%=link_to current_user.username + "(#{current_user.link_karma})(#{current_user.karma})", current_user%></li>
             <li><%= link_to '', messages_path, :class => "foundicon-mail"%></li>
             <li><%= link_to '', edit_user_path(current_user), :class => "foundicon-tools"%></li>
             <li><%= link_to 'logout', signout_path, :method => "delete"%></li>

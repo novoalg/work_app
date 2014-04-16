@@ -1,0 +1,20 @@
+$("#reply-karma-<%="#{@user_reply.id}"%>").html(<%= escape_javascript(@user_reply.karma.to_s)%>);
+<% if @vote_has_been_destroyed %>
+       /* $("#up-comment-arrow").replaceWith('<=j render 'comments/upvote_comment_arrow' %>');*/
+        $("#up-reply-arrow-<%="#{@user_reply.id}"%>").removeClass('orange');
+        $("#down-reply-arrow-<%="#{@user_reply.id}"%>").removeClass('blue');
+
+        /*$("#down-comment-arrow").replaceWith('<=j render 'comments/downvote_comment_arrow' %>');*/
+<% else %>
+    <% if @direction == "up" %>
+        $("#up-reply-arrow-<%="#{@user_reply.id}"%>").addClass('orange');
+        $("#down-reply-arrow-<%="#{@user_reply.id}"%>").removeClass('blue');
+        /*$("#up-comment-arrow").replaceWith('<=j render 'comments/upvote_comment_arrow_or' %>');
+        $("#down-comment-arrow").replaceWith('<=j render 'comments/downvote_comment_arrow' %>');*/
+    <% else %>
+        $("#up-reply-arrow-<%="#{@user_reply.id}"%>").removeClass('orange');
+        $("#down-reply-arrow-<%="#{@user_reply.id}"%>").addClass('blue');
+        /*$("#down-comment-arrow").replaceWith('<=j render 'comments/downvote_comment_arrow_blu' %>');
+        $("#up-comment-arrow").replaceWith('<j render 'comments/upvote_comment_arrow' %>');*/
+    <% end %>
+<% end %>

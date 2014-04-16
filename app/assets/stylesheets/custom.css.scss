@@ -36,6 +36,16 @@ textarea {
   }
 }
 
+.top-bar{
+    height: 50px;
+}
+
+@media only screen and (min-width: 40.063em) and (max-width: 64em) {
+    .top-bar-section li:not(.has-form) a:not(.button) {
+        padding: 0 10px;
+    }
+}
+
 .row .row {
 
     margin-bottom: 10px;
@@ -52,6 +62,22 @@ textarea {
   );
 }
 
+.description-box {
+  @include panel(
+  $bg:#BDBDBD,
+  $padding:20px,
+  $adjust:true
+  );
+}
+
+sidebar {
+    font-size: 20px;
+    font-color: white;
+    margin-left: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+}
 /* subreddit sidebar */
 
 .sub-button {
@@ -103,6 +129,8 @@ textarea {
 .links-comments {
     color: $grayDarker;
     font: 15px bold;
+    font-weight: 900;
+    font-family: monospace;
 }
 
 .comment-container {
@@ -184,6 +212,9 @@ p {
 
 .motd {
     background-color: #D5DFE8;
+    padding-bottom: 20px;
+    padding-top: 20px;
+
     //margin: 0px;
     //width:100%;
 
@@ -238,14 +269,8 @@ footer {
   }
 }
 
-/* sidebar */
 
-.sidebar {
-    width: 300px;
-    float: right;
-    background-color: #4F869E;
-    
-}
+
 
 /* misc */
 

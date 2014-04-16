@@ -1,19 +1,19 @@
 
-$("#karma").html(<%= escape_javascript(@post.karma.to_s)%>);
+$("#karma-<%="#{@post.id}"%>").html(<%= escape_javascript(@post.karma.to_s)%>);
 <% if @vote_has_been_destroyed %>
-        $("#up-arrow").replaceWith('<%=j render 'posts/upvote_arrow' %>');
-        $("#down-arrow").replaceWith('<%=j render 'posts/downvote_arrow' %>');
-        $("#karma").replaceWith('<%=j render 'posts/karma_norm'%>');
+        $("#up-arrow-<%="#{@post.id}"%>").replaceWith('<%=j render 'posts/upvote_arrow', :post => @post %>');
+        $("#down-arrow-<%="#{@post.id}"%>").replaceWith('<%=j render 'posts/downvote_arrow', :post => @post %>');
+        $("#karma-<%="#{@post.id}"%>").replaceWith('<%=j render 'posts/karma_norm', :post => @post %>');
 
 <% else %>
     <% if @direction == "up" %>
-        $("#up-arrow").replaceWith('<%=j render 'posts/upvote_arrow_or' %>');
-        $("#down-arrow").replaceWith('<%=j render 'posts/downvote_arrow' %>');
-        $("#karma").replaceWith('<%=j render 'posts/karma_or'%>');
+        $("#up-arrow-<%="#{@post.id}"%>").replaceWith('<%=j render 'posts/upvote_arrow_or', :post => @post %>');
+        $("#down-arrow-<%="#{@post.id}"%>").replaceWith('<%=j render 'posts/downvote_arrow', :post => @post %>');
+        $("#karma-<%="#{@post.id}"%>").replaceWith('<%=j render 'posts/karma_or', :post => @post%>');
     <% else %>
-        $("#down-arrow").replaceWith('<%=j render 'posts/downvote_arrow_blu' %>');
-        $("#up-arrow").replaceWith('<%=j render 'posts/upvote_arrow' %>');
-        $("#karma").replaceWith('<%=j render 'posts/karma_blu'%>');
+        $("#down-arrow-<%="#{@post.id}"%>").replaceWith('<%=j render 'posts/downvote_arrow_blu', :post => @post %>');
+        $("#up-arrow-<%="#{@post.id}"%>").replaceWith('<%=j render 'posts/upvote_arrow', :post => @post %>');
+        $("#karma-<%="#{@post.id}"%>").replaceWith('<%=j render 'posts/karma_blu', :post => @post %>');
     <% end %>
  
 <% end %>

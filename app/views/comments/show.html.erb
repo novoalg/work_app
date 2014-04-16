@@ -1,5 +1,4 @@
-<div class="large-8 columns comments">
-    <hr></hr>
+<div class="large-8 columns comment-container">
     <div class="large-8 columns">
       <%= link_to "#{User.find_by_id(@comment.user_id).username}-", user_path(User.find(@comment.user_id).username), :class => "blueUser"%>
         <small class="karmaUser"><%=" #{@comment.karma}"%></small><small class="karmaUser"><%=" points #{time_ago_in_words(@comment.created_at)} ago" %></small>
@@ -10,10 +9,9 @@
         </div>
         <div class="large-12 links-comments">
         <%= link_to "permalink", show_user_comment_path(:subname => @post.subname , :post_id => @post.id, :id => @comment.id) %>
-        &nbsp
         <%= link_to "comments", subreddit_post_path(:subreddit_id => @post.subname , :id => @post.id) %>
         </div>
-<br></br><hr></hr>
+<br></br>
 </div>
 <br></br>
 <br></br>

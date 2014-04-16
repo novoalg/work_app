@@ -10,11 +10,12 @@
 #  updated_at  :datetime         not null
 #  url         :string(255)
 #  subname     :string(255)
-#  karma       :integer
+#  karma       :integer          default(0)
+#  is_link     :boolean
 #
 
 class Post < ActiveRecord::Base
-  attr_accessible :description, :subname, :title, :user_id, :url, :karma, :is_link
+  attr_accessible :description, :subname, :title, :user_id, :url, :karma, :is_link, :comment_id
   belongs_to :user
   belongs_to :subreddit
   default_scope :order => 'posts.karma DESC' && 'posts.created_at DESC'
@@ -25,6 +26,7 @@ class Post < ActiveRecord::Base
 #  has_one :karma
   validates :user_id, :presence => true
   validates :title, :presence => true
+  validates :description, :length => { :minimum => 1, :maximum => 8117 }, :allow_blank => true
   URL_REGEX_MASTER = /^(http:\/\/www\.[a-zA-Z0-9]+\.[a-z]{2,3}|www\.[a-zA-Z0-9]+\.[a-z]{2,3}|[a-zA-Z0-9]+\.[a-z]{2,3}|http:\/\/[a-zA-Z0-9]+)/ 
   validates :subname, :presence => true
   validates :url, :format => { :with => URL_REGEX_MASTER }, :if => :is_link?  

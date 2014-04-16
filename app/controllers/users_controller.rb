@@ -11,17 +11,9 @@ class UsersController < ApplicationController
     @user = User.find_by_username(params[:id])
     @posts = Post.where(:user_id => @user.id)
     @comments = Comment.where(:user_id => @user.id)
-
-    @comment_karma = 0
-    @link_karma = 0
-
-    @posts.each do |p|
-        @link_karma += p.karma
-    end
-    @comments.each do |p|
-        @comment_karma += p.karma
-    end
-        
+    user_link_karma(@user.id)
+    user_karma(@user.id)
+           
 
   end
 

@@ -3,12 +3,12 @@
 <% else %>
 <br/>
 <div class= "row">
-        <h2 class="large-9 columns">Subreddit's content</h2>
-        <div class="large-9 columns">
-        <% if @posts %>
+        <h2 class="large-8 columns">Subreddit's content</h2>
+        <div class="large-8 columns">
+        <% if @post %>
 
-            <%= render @posts %>
-            <%= will_paginate @posts %>
+            <%= render @post %>
+            <%= will_paginate @post %>
         <% end %>
         </div>
     <%= render 'shared/subreddit_sidebar' %>

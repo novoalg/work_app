@@ -1,14 +1,32 @@
+       
         <hr></hr>
-        <div class="large-1 columns" align="center">
-                <h4><%="#{post.karma}"%></h4>
-        </div>
-        <% if !post.url.nil? && post.description.nil?%>
+       <div class="small-2 medium-1 large-1 columns">
+
+        <% if current_user.has_voted?(post) %>
+        <% if current_user.votes.where("post_id =?", post.id).first.direction == "up" %>
+            <%= render 'posts/upvote_arrow_or', :post => post %>
+        <% else %>
+            <%= render 'posts/upvote_arrow', :post => post %>
+        <% end %>
+        <%= render 'posts/karma_master', :post => post %>
+        <% if current_user.votes.where("post_id =?", post.id).first.direction == "down" %>
+            <%= render 'posts/downvote_arrow_blu', :post => post %>
+        <% else %>
+            <%= render 'posts/downvote_arrow', :post => post %>
+        <% end %>
+        <% else %>
+            <%= render 'posts/upvote_arrow', :post => post %>
+            <h4 id="karma-<%="#{post.id}"%>"><%= "#{post.karma}" %></h4>
+            <%= render 'posts/downvote_arrow', :post => post %>
+        <% end %>
+</div> 
+             <% if !post.url.nil? && post.description.nil?%>
             <h4><%= link_to "#{post.title}", "#{post.url}", :class => "link-title" %></h4>
-            <small>submitted <%= time_ago_in_words(post.created_at)%> ago by <%= link_to "#{User.find(post.user_id).username}", user_path(User.find(post.user_id).username)%>  |</small>
+            <small>submitted <%= time_ago_in_words(post.created_at)%> ago by <%= link_to "#{User.find(post.user_id).username}", user_path(User.find(post.user_id).username) %> to <%= link_to "#{Subreddit.find_by_subname(post.subname).subname}", subreddit_path(Subreddit.find_by_subname(post.subname)) %>  |</small>
             <small><%= link_to "#{Comment.where(:post_id => post.id).count} comments ", subreddit_post_path(post.subname, post.id) %>|<%= link_to ' share', '#'%></small>
         <% else %>
             <h4><%= link_to "#{post.title}", subreddit_post_path(post.subname, post.id), :class => "post-title" %></h4>
-            <small>submitted <%= time_ago_in_words(post.created_at)%> ago by <%= "#{User.find(post.user_id).username}"%> |</small>
+            <small>submitted <%= time_ago_in_words(post.created_at)%> ago by <%= "#{User.find(post.user_id).username}" %> to <%= link_to "#{Subreddit.find_by_subname(post.subname).subname}", subreddit_path(Subreddit.find_by_subname(post.subname)) %>|</small>
             <small><%= link_to "#{Comment.where(:post_id => post.id).count} comments " , subreddit_post_path(post.subname, post.id) %>|<%= link_to ' share', '#'%></small>
         <% end %>
         <br></br>

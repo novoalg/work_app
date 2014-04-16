@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140404163811) do
+ActiveRecord::Schema.define(:version => 20140416194509) do
 
   create_table "comments", :force => true do |t|
     t.string   "content"
@@ -49,8 +49,11 @@ ActiveRecord::Schema.define(:version => 20140404163811) do
   create_table "replies", :force => true do |t|
     t.integer  "user_id"
     t.integer  "comment_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+    t.string   "content"
+    t.integer  "karma",      :default => 0
+    t.integer  "post_id"
   end
 
   add_index "replies", ["comment_id"], :name => "index_replies_on_comment_id"
@@ -82,9 +85,11 @@ ActiveRecord::Schema.define(:version => 20140404163811) do
     t.string   "username"
     t.string   "email"
     t.string   "remember_token"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
     t.boolean  "admin"
+    t.integer  "karma",          :default => 0
+    t.integer  "link_karma",     :default => 0
   end
 
   add_index "users", ["remember_token"], :name => "index_users_on_remember_token"
@@ -96,10 +101,12 @@ ActiveRecord::Schema.define(:version => 20140404163811) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "comment_id"
+    t.integer  "reply_id"
   end
 
   add_index "votes", ["comment_id"], :name => "index_votes_on_comment_id"
   add_index "votes", ["post_id"], :name => "index_votes_on_post_id"
+  add_index "votes", ["reply_id"], :name => "index_votes_on_reply_id"
   add_index "votes", ["user_id"], :name => "index_votes_on_user_id"
 
 end

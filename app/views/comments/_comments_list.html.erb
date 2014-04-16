@@ -38,7 +38,8 @@
                 <div class="large-12 columns links-comments">
                     <%= link_to "permalink", show_user_comment_path(:subname => Post.find_by_id(c.post_id).subname , :post_id => Post.find_by_id(c.post_id), :id => c.id) %>
                     &nbsp
-                    <%= link_to "reply", reply_to_comment_path(:post_id => Post.find_by_id(c.post_id), :format => :js), :remote => true, :id => "reply" %>
+                    <%= link_to "reply", reply_to_comment_path(:post_id => Post.find_by_id(c.post_id), :comment_id => c.id, :format => :js), :remote => true, :id => "reply-#{c.id}" %>
+                    <%= render 'replies/reply_list' %>
                 </div>
             </div>
         </div>

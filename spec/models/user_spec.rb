@@ -9,6 +9,8 @@
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #  admin          :boolean
+#  karma          :integer          default(0)
+#  link_karma     :integer          default(0)
 #
 
 require 'spec_helper'

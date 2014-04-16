@@ -9,10 +9,12 @@
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #  admin          :boolean
+#  karma          :integer          default(0)
+#  link_karma     :integer          default(0)
 #
 
 class User < ActiveRecord::Base
-  attr_accessible :email, :username 
+  attr_accessible :email, :username, :karma, :link_karma 
   validates :username, :uniqueness => true, :presence => true, :length => { :minimum => 3, :maximum => 20 }
   has_many :subreddits, :dependent => :destroy
   has_many :votes
@@ -42,6 +44,9 @@ class User < ActiveRecord::Base
         self.votes.where("comment_id = ?", comment.id).any? 
   end
 
+  def has_reply_voted?(reply)
+        self.votes.where("reply_id = ?", reply.id).any?
+  end
 
   def has_subbed?(subreddit)
         self.subscriptions.where("subreddit_id = ?", subreddit.id).any?

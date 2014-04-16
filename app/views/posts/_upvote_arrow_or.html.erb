@@ -1,2 +1,2 @@
-<%= link_to "", vote_subreddit_post_path(:post_id => @post.id, :direction => "up",  :format => :js ), :class => "foundicon-up-arrow orange", :id => "up-arrow",  :remote => true %> 
+<%= link_to "", vote_subreddit_post_path(:post_id => post.id, :direction => "up",  :format => :js ), :class => "foundicon-up-arrow orange", :id => "up-arrow-#{post.id}",  :remote => true %> 
 

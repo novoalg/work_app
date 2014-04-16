@@ -5,8 +5,8 @@
       <%= c.text_area :content, :placeholder => "Submit a comment...", :size => "30x4" %>
       <%= c.hidden_field :post_id, :value => @post.id %>
       <%= c.hidden_field :subreddit_id, :value => @sub.id %>
-      <div class="small-8 medium-5 large-3 columns">
-      <%= c.submit "submit", :class => "btn btn-small btn-primary" %>
+      <div class="small-8 medium-5 large-4 columns">
+      <%= c.submit "submit", :class => "button" %>
       </div>
   </div>
     </div>

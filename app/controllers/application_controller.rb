@@ -2,6 +2,33 @@ class ApplicationController < ActionController::Base
   include CasAuthentication
   include SessionsHelper
   before_filter :login_required
+  helper_method :user_karma
+  helper_method :user_link_karma
+  
+
+  def user_link_karma(id)
+    user = User.find(id)
+    user_posts = Post.where(:user_id => user.id)
+    link_karma = 0
+    user_posts.each do |p|
+        if p.karma > 0
+           link_karma += p.karma
+        end
+    end
+    user.link_karma = link_karma
+    user.save!
+  end
+
+  def user_karma(id)
+    user = User.find(id)
+    user_comments = Comment.where(:user_id => user.id)
+    karma = 0
+    user_comments.each do |p|
+        karma += p.karma
+    end
+    user.karma = karma
+    user.save!
+  end
 
   def logout
   end

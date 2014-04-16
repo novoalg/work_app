@@ -1,0 +1,45 @@
+<% if reply.comment_id == comment_id %>
+<div class="row comment-container">
+<div class="large-12 columns">
+ <% if current_user.has_reply_voted?(reply) %>
+        <div class="large-1 columns">
+        <% if reply.votes.where("reply_id =?", reply.id).first.direction == "up" %>
+<!-- ORANGE UPVOTE ARROW -->
+            <%= link_to "", vote_comment_reply_path(:reply_id => reply.id, :direction => "up",  :format => :js ), :class => "foundicon-up-arrow orange", :id => "up-reply-arrow-#{reply.id}",  :remote => true %> 
+        <% else %>
+<!-- UPVOTE ARROW -->
+            <%= link_to "", vote_comment_reply_path(:reply_id => reply.id, :direction => "up", :format => :js), :class => "foundicon-up-arrow", :id => "up-reply-arrow-#{reply.id}", :remote => true %>
+        <% end %>
+        <% if current_user.votes.where("reply_id =?", reply.id).first.direction == "down" %>
+<!-- BLUE DOWNVOTE ARROW -->
+            <%= link_to "", vote_comment_reply_path(:reply_id => reply.id, :direction => "down",  :format => :js ), :class => "foundicon-down-arrow blue", :id => "down-reply-arrow-#{reply.id}",  :remote => true %> 
+        <% else %>
+<!-- DOWNVOTE ARROW -->
+            <%= link_to "", vote_comment_reply_path(:reply_id => reply.id, :direction => "down",  :format => :js ), :class => "foundicon-down-arrow" , :id => "down-reply-arrow-#{reply.id}", :remote => true %> 
+        <% end %>
+        </div>
+  <% else %>
+            <div class="large-1 columns">
+<!-- UPVOTE ARROW -->
+            <%= link_to "", vote_comment_reply_path(:reply_id => reply.id, :direction => "up", :format => :js), :class => "foundicon-up-arrow", :id => "up-reply-arrow-#{reply.id}", :remote => true %> 
+<!-- DOWNVOTE ARROW -->
+            <%= link_to "", vote_comment_reply_path(:reply_id => reply.id, :direction => "down",  :format => :js ), :class => "foundicon-down-arrow" , :id => "down-reply-arrow-#{reply.id}", :remote => true %> 
+            </div>
+    <% end %>
+
+    <div class="large-8 columns blueUser">
+        <%= link_to "#{User.find_by_id(reply.user_id).username}-", user_path(User.find(reply.user_id).username), :class => "blueUser"%>
+        <small class="karmaUser" id="reply-karma-<%="#{reply.id}"%>"><%="#{reply.karma}"%></small><small class="karmaUser"><%=" points #{time_ago_in_words(reply.created_at)} ago" %></small>
+    </div>
+    <br></br>
+    <div class="large-12 columns">
+            <p class="comment-content"><%="#{reply.content}"%></p>
+    </div>
+        
+    <div class="large-12 columns links-comments">
+            <%= link_to "permalink", show_user_reply_path(:subname => @post.subname , :post_id => @post.id, :id => reply.id) %>
+            &nbsp
+    </div>
+</div>
+</div>
+<% end %>

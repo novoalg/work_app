@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="small-7 medium-8 large-8 columns">
+    <div class="field">
+    <%= form_for(@reply) do |r| %>
+      <%= r.text_area :content, :placeholder => "Submit a comment...", :size => "30x4" %>
+      <%= r.hidden_field :user_id, :value => current_user.id %>
+      <%= r.hidden_field :comment_id, :value => @comment.id %>
+      <div class="small-8 medium-5 large-4 columns">
+      <%= r.submit "submit", :class => "button" %>
+      </div>
+  </div>
+    </div>
+  <% end %>
+</div>

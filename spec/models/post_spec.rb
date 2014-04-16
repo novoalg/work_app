@@ -10,7 +10,8 @@
 #  updated_at  :datetime         not null
 #  url         :string(255)
 #  subname     :string(255)
-#  karma       :integer
+#  karma       :integer          default(0)
+#  is_link     :boolean
 #
 
 require 'spec_helper'

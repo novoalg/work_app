@@ -1,0 +1,21 @@
+<div class="row comment-container">
+<div class="large-12 columns">
+    <div class="large-8 columns blueUser">
+        <%= link_to "#{User.find_by_id(@reply.user_id).username}-", user_path(User.find(@reply.user_id).username), :class => "blueUser"%>
+        <small class="karmaUser" id="comment-karma-<%="#{@reply.id}"%>"><%="#{@reply.karma}"%></small><small class="karmaUser"><%=" points #{time_ago_in_words(@reply.created_at)} ago" %></small>
+    </div>
+    <br></br>
+    <div class="large-12 columns">
+            <p class="comment-content"><%="#{@reply.content}"%></p>
+    </div>
+        
+    <div class="large-12 columns links-comments">
+            <%= link_to "permalink", show_user_reply_path(:subname => @post.subname , :post_id => @post.id, :id => @reply.id) %>
+            <%= link_to "reply" %>
+            <%= link_to "comments", subreddit_post_path(:subreddit_id => @post.subname , :id => @post.id) %>
+
+           <!--  link_to "reply", reply_to_comment_path(:post_id => Post.find_by_id(comment.post_id), :comment_id => comment.id, :format => :js), :remote => true, :id => "reply-#{comment.id}" %>-->
+    </div>
+</div>
+</div>
+

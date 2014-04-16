@@ -1,24 +1,24 @@
 <div class="row">
 <br/>
-<div class="small-6 medium-8 large-9 columns">
+<div class="small-6 medium-8 large-8 columns">
 
 <div class="small-2 medium-1 large-1 columns">
         <% if current_user.has_voted?(@post) %>
         <% if current_user.votes.where("post_id =?", @post.id).first.direction == "up" %>
-            <%= render 'posts/upvote_arrow_or' %>
+            <%= render 'posts/upvote_arrow_or', :post => @post %>
         <% else %>
-            <%= render 'posts/upvote_arrow' %>
+            <%= render 'posts/upvote_arrow', :post => @post %>
         <% end %>
-        <%= render 'posts/karma_master' %>
+        <%= render 'posts/karma_master', :post => @post %>
         <% if current_user.votes.where("post_id =?", @post.id).first.direction == "down" %>
-            <%= render 'posts/downvote_arrow_blu' %>
+            <%= render 'posts/downvote_arrow_blu', :post => @post %>
         <% else %>
-            <%= render 'posts/downvote_arrow' %>
+            <%= render 'posts/downvote_arrow', :post => @post%>
         <% end %>
         <% else %>
-            <%= render 'posts/upvote_arrow' %>
+            <%= render 'posts/upvote_arrow', :post => @post %>
             <h4 id="karma"><%= "#{@post.karma}" %></h4>
-            <%= render 'posts/downvote_arrow' %>
+            <%= render 'posts/downvote_arrow', :post => @post %>
         <% end %>
 </div>
 
@@ -33,17 +33,18 @@
         <small><%= link_to "#{Comment.where(:post_id => @post.id).count} comments ", subreddit_post_path(@post.subname, @post.id) %>|<%= link_to ' share', '#'%></small>
         <br></br>
         <br></br>
-        <div class="jumbotron medium-10 large-10 columns" align="left">
-            <small><%= @post.description %></small>
+        <div class="description-box medium-10 large-10 columns" align="left">
+            <p><%= @post.description %></p>
         </div>
     <% end %>
 
     <hr></hr>
-    <h3><small>top 200 comments</small></h3>
+    <h3><small>top comments</small></h3>
     <hr></hr>
     <%= render 'comments/new' %>
-    <%= render 'comments/comments_list' %>
-    <%= will_paginate @comments %>
+    <% if @comments %>
+        <%= render @comments %>
+    <% end %>
 </div>
     <%= render 'shared/subreddit_sidebar' %>
 </div>

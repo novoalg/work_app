@@ -1,12 +1,29 @@
-<br/>
+<div class="large-12 columns motd">
 <% if @user.nil? %>
     <%= render 'shared/user_not_found' %>
 <% else %>
-    <div class="large-9 columns">
-	<h2 class="large-5 columns">Overview for <%= @user.username%><hr></hr></h2>
-    <%= render 'shared/user_comments' %>
-    <br></br>
-    <%= render 'shared/user_posts' %>
+<dl class="accordion" data-accordion>
+  <dd>
+    <a href="#panel1">Overview for <%= @user.username%></a>
+    <div id="panel1" class="content active">
+      <dl class="tabs" data-tab>
+        <dd class="active"><a href="#panel2-1">Comments</a></dd>
+        <dd><a href="#panel2-2">Links</a></dd>
+      </dl>
+      <div class="tabs-content">
+        <div class="content active" id="panel2-1">
+            <% if @comments %>
+                <%= render @comments %>
+            <% end %>
+        </div>
+        <div class="content" id="panel2-2">
+            <% if @posts %>
+                <%= render @posts %>
+            <% end %>
+        </div>
+      </div>
     </div>
-<%= render 'shared/user_sidebar'%>
+  </dd>
+</dl>
 <% end %>
+</div>

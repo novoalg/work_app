@@ -1,31 +1,19 @@
 class CommentsController < ApplicationController
     def create
         @comment = Comment.create(params[:comment])
-        @post = Post.find_by_id(@comment.post_id)
+        post = Post.find_by_id(@comment.post_id)
         @comment.karma = 0
         @comment.user_id = current_user.id
-        @comment.post_id = @post.id
-        @comments = Comment.where(:post_id => @post.id)
-        sub_id = Subreddit.find_by_subname(@post.subname)
+        @comment.post_id = post.id
+        #@comments = Comment.where(:post_id => @post.id)
+        sub_id = Subreddit.find_by_subname(post.subname)
         @comment.save
-        redirect_to subreddit_post_path(Subreddit.find_by_subname(@post.subname).id, @post.id)
+        redirect_to subreddit_post_path(Subreddit.find_by_subname(post.subname).id, post.id)
     end
 
     def reply
-
-        #@comment = Comment.create(params[:comment])
-        @user = current_user
-        @post = Post.find_by_id(params[:post_id])
-
-        #@comment.karma = 0
-        #@comment.user_id = @user.id
-        #@comment.post_id = @post.id
-
-        #@replied_to_comment = Comment.find(params[:comment_id])
-
-        #@user.build_reply(:user_id => @user.id, :comment_id => @replied_to_comment.id)
-        #@comment.save
-        #redirect_to subreddit_post_path(Subreddit.find_by_subname(@post.subname).id, @post.id)
+        @comment = Comment.find_by_id(params[:comment_id])
+        @reply = Reply.new
         respond_to do |format| 
             format.html { redirect_to subreddit_post_path(Subreddit.find_by_subname(@post.subname).id, @post.id)}
             format.js
@@ -36,16 +24,15 @@ class CommentsController < ApplicationController
 
     def new
         @comment = Comment.new(params[:id])
-        @post = Post.find(params[:post_id])
-        @subreddit = Subreddit.find_by_subname(@post.subname)
+        #@post = Post.find(params[:post_id])
+        #@subreddit = Subreddit.find_by_subname(@post.subname)
     end 
 
     def show
         @comment = Comment.find_by_id(params[:id])
-
-        #logger.info "********************************COMMENT   #{@comment.inspect}   ********************"
+        @replies = Reply.where(:comment_id => @comment.id)
         @post = Post.find_by_id(@comment.post_id)
-        @vote = current_user.build_vote
+        #@vote = current_user.build_vote
     end
 
     def destroy
