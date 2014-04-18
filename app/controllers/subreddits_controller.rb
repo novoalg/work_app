@@ -57,6 +57,7 @@ class SubredditsController < ApplicationController
 
     def create 
         @subreddit = Subreddit.create(params[:subreddit])
+        @subreddit.user_id = current_user.id
         @subreddit.user_count = 0;
         if @subreddit.save 
             current_user.create_subscription(:subreddit_id => @subreddit.id, :user_id => current_user.id).save!

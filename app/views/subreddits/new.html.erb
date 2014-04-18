@@ -4,7 +4,6 @@
 
 <%= provide('title', "Create your new subreddit") %>
 <%= render 'shared/error_messages', :object => f.object %>
-<%= f.hidden_field :user_id, :value => current_user.id %>
 <%= f.label :subname %>
 <%= f.text_field :subname %>
 <%= f.label :title %>

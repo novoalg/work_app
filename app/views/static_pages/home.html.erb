@@ -13,11 +13,13 @@
             <% if @all_posts %>
                 <%= render @all_posts %>
             <% end %>      
+            <%= foundation_paginate @all_posts %>
         </div>
         <div class="content" id="panel2-2">
             <% if @posts %>
                 <%= render @posts %>
             <% end %>
+            <%= foundation_paginate @posts%>
         </div>
         <div class="content" id="panel2-3">
         <h2><%= link_to "Start a new subreddit!", new_subreddit_path %></h2>

@@ -15,11 +15,12 @@
 
 class User < ActiveRecord::Base
   attr_accessible :email, :username, :karma, :link_karma 
-  validates :username, :uniqueness => true, :presence => true, :length => { :minimum => 3, :maximum => 20 }
+  validates :username, :uniqueness => true, :presence => true, :length => { :minimum => 3, :maximum => 30 }
   has_many :subreddits, :dependent => :destroy
   has_many :votes
   has_many :replies
   has_many :comments
+  #has_many :post
   has_many :subscriptions
   belongs_to :post
   belongs_to :vote

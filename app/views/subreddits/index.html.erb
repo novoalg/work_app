@@ -13,18 +13,18 @@
         <div class="panel">
             <h3><%= link_to "#{s.subname}: #{s.title}", subreddits_path + "/#{s.subname}"%> <small class="green"><%= "#{s.user_count}"%> users subscribed</small></h3>
             <h4 class="list-group-item-heading"><%= s.description %></h4>
-            <%= will_paginate @subreddits %>
         </div>
         <% end %>
+            <%= foundation_paginate @subreddits %>
     </div>
 <div class="content" id="panel2-2">
     <% @subreddit_subscriptions.each do |s| %>
     <div class="panel">
         <h3><%= link_to "#{s.subname}: #{s.title}", subreddits_path + "/#{s.subname}"%> <small class="green"><%= "#{s.user_count}"%> users subscribed</small></h3>
         <h4 class="list-group-item-heading"><%= s.description %></h4>
-        <%= will_paginate @subreddit_subscription %>
     </div>
     <% end %>
+        <%= foundation_paginate @subreddit_subscription %>
 </div>
 </div>
   </dd>
