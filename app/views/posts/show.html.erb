@@ -33,9 +33,11 @@
         <small><%= link_to "#{Comment.where(:post_id => @post.id).count} comments ", subreddit_post_path(@post.subname, @post.id) %>|<%= link_to ' share', '#'%></small>
         <br></br>
         <br></br>
+        <% unless !@post.description.any? %>
         <div class="description-box medium-10 large-10 columns" align="left">
             <p><%= @post.description %></p>
         </div>
+        <% end %>
     <% end %>
 
     <hr></hr>

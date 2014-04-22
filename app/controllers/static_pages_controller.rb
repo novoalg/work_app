@@ -6,6 +6,7 @@ class StaticPagesController < ApplicationController
     subnames = subs.map(&:subname)
     @posts = Post.where('subname in (?)', subnames)
     @all_posts = Post.all
+    @all_posts.shuffle
     @all_posts = @all_posts.paginate(:page => params[:page], :per_page => 30)
     @posts = @posts.paginate(:page => params[:page], :per_page => 30)
     logger.info "*******ALL_POSTS: #{@all_posts.inspect}"

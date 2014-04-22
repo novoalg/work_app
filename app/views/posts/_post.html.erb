@@ -1,6 +1,6 @@
        
         <hr></hr>
-       <div class="small-2 medium-1 large-1 columns">
+       <div class="small-2 medium-1 large-1 columns center">
 
         <% if current_user.has_voted?(post) %>
         <% if current_user.votes.where("post_id =?", post.id).first.direction == "up" %>

@@ -10,6 +10,10 @@
         <div class="large-12 links-comments">
         <%= link_to "permalink", show_user_comment_path(:subname => @post.subname , :post_id => @post.id, :id => @comment.id) %>
         <%= link_to "comments", subreddit_post_path(:subreddit_id => @post.subname , :id => @post.id) %>
+        <% if @replies %>
+            <%= render @replies, :comment_id => @comment.id  %>
+        <% end %>
+
         </div>
 <br></br>
 </div>

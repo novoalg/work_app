@@ -14,7 +14,7 @@
 #
 
 class User < ActiveRecord::Base
-  attr_accessible :email, :username, :karma, :link_karma 
+  attr_accessible :email, :username, :karma, :link_karma, :password, :password_confirmation
   validates :username, :uniqueness => true, :presence => true, :length => { :minimum => 3, :maximum => 30 }
   has_many :subreddits, :dependent => :destroy
   has_many :votes
